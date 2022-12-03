@@ -49,8 +49,7 @@ public class Main {
         // System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         String[][] namesArray = helper.readCSV("lib\\test.csv"); // adressdaten.csv
         System.out.println("-------------------------------------------");
-        bubbleSortNames(namesArray); // WHY IS THIS  WORKING ?? 
-        helper.write2dArrayToFile(namesArray, "lib\\output.csv"); // namesArray should not have been changed here ?
+        helper.write2dArrayToFile(bubbleSortNames(namesArray), "lib\\output.csv"); 
         System.out.println("Done! ");
         // helper.print2DArray(namesArray);
     }
@@ -62,7 +61,6 @@ public class Main {
     private static String[][] bubbleSortNames(String[][] array) {    // time complexity: O(n^2) - worst case
         int n = array.length;
         boolean swapped;  
-        String[][] array2 = new String[2][2];
         int steps = 0; 
         for (int i = 0; i < n - 1; i++) {   // all elements checked after each other
             swapped = true;    // 'false' - improves best case from O(n^2) to O(n)
@@ -82,7 +80,7 @@ public class Main {
         }
         // System.out.println(helper.padRight(("Predicted steps: "), 20) + (n * n));
         // System.out.println(helper.padRight(("Steps: "), 20) + "0" + steps);
-        return array2;
+        return array;
     }
 
     private static int[] bubbleSort(int[] array) {    // time complexity: O(n^2) - worst case
