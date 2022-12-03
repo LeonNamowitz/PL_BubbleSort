@@ -1,5 +1,3 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -16,29 +14,33 @@ public class Main {
         // bubbleSort(arr);
         // System.out.println(Arrays.toString(arr));
         
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        String namesArray[][] = helper.readCSV();
-        System.out.println("-------------------------------------------");
-        bubbleSortNames(namesArray);
-        helper.print2DArray(namesArray);
+        for (int i = 0; i < 10; i++) {
+            String namesArray[][] = helper.readCSV("lib\\adressdaten.csv", 10_000);
+            long startTime = System.nanoTime();
+            String[][] sorted = bubbleSortNames(namesArray);
+            long endTime = System.nanoTime();
+            long time = endTime - startTime;
+            double seconds = (double)time / 1_000_000_000.0;
+            System.out.println("Time: " + seconds + " seconds");
+        }
+
+        // helper.writeFile(sorted);
 
     }
     
 
 
 
-    public static void test(){
-        String s1 = "ALeon";
-        String s2 = "BSimon";
-        System.out.println(s1.compareTo(s2));
-
-        if (s1.compareTo(s2) > 0)
-            System.out.println("Leon > Simon");
-
+    public static void test() throws Exception{
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        String namesArray[][] = helper.readCSV("lib\\test.csv", 10);
+        System.out.println("-------------------------------------------");
+        bubbleSortNames(namesArray);
+        helper.print2DArray(namesArray);
     }
 
     private static String[][] bubbleSortNames(String[][] array) {    // time complexity: O(n^2) - worst case
-        int n = array.length; // hopefully 10 ?
+        int n = array.length; 
         for (int i = 0; i < n - 1; i++)    // all elements checked after each other
             for (int j = 0; j < n - 1; j++)    // single element moving through array
                 if ((array[j][0].compareTo(array[j + 1][0])) > 0) {
