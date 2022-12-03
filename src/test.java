@@ -1,7 +1,7 @@
 // create Main method
 public class test {
     public static void main(String[] args) {
-        int[] arr = createArray(22_000);
+        int[] arr = createArray(62_000);
         // printArray(arr);
         double time = sortAndTime(arr);
         // printArray(arr);
