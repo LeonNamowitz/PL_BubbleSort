@@ -8,27 +8,25 @@ public class Main {
     static Helper helper = new Helper();
     
     public static void main(String[] args) throws Exception {
-        // int[] arr = createArray(120);
-        // System.out.println(Arrays.toString(arr));
-        // System.out.println("Sorted Array: ");
-        long startTime = System.nanoTime();
-        bubbleSortLists(unsortedArray);
-        long endTime = System.nanoTime();
-        long time = endTime - startTime;
-        double seconds = (double)time / 1_000_000_000.0;
-        System.out.println("Time: " + seconds + " seconds");
+ 
+        // long startTime = System.nanoTime();
+        // bubbleSortLists(unsortedArray);
+        // long endTime = System.nanoTime();
+        // long time = endTime - startTime;
+        // double seconds = (double)time / 1_000_000_000.0;
+        // System.out.println("Time: " + seconds + " seconds");
 
-        // benchmark(3);
-        // System.out.print
-
+        benchmark(3);
+        // test();
     }
     
 
     public static void benchmark(int runs) throws Exception  {
         double sum = 0;
+        String file = "lib\\adressdaten.csv";
         String[] results = new String[runs];
         for (int i = 0; i < runs; i++) {
-            String namesArray[][] = helper.readCSV("lib\\adressdaten.csv", 10_000);
+            String namesArray[][] = helper.readCSV(file);
             long startTime = System.nanoTime(); 
             bubbleSortNames(namesArray);
             long endTime = System.nanoTime();
@@ -36,36 +34,50 @@ public class Main {
             double seconds = (double)time / 1_000_000_000.0;
             System.out.println("Time: " + seconds + " seconds");
             sum += seconds;
-            results[i] = "Run " + (i + 1) + ":  |  " + seconds + " seconds";    // @ToDo: format runs with same spacing
+
+            String temp = (helper.padRight("Run " + (i + 1) + ":", 10) + "|  " + seconds + " seconds"); // we don't talk about this
+            results[i] = temp;
         }
         double average = (sum / runs);
         System.out.println("-------------------------");
-        System.out.println("Average: " + average);
-
-        helper.writeBenchmarkToFile(results, average, runs);
+        // System.out.println("Average: " + average);
+        System.out.println("Done! ");
+        helper.writeBenchmarkToFile(results, average, runs, file);
     }
 
     public static void test() throws Exception  {
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        String namesArray[][] = helper.readCSV("lib\\test.csv", 10);
+        String namesArray[][] = helper.readCSV("lib\\test.csv");
         System.out.println("-------------------------------------------");
         bubbleSortNames(namesArray);
         helper.print2DArray(namesArray);
     }
 
+
+    //////////////////////////////////// BUBBLE SORT ////////////////////////////////////
+
+
     private static String[][] bubbleSortNames(String[][] array) {    // time complexity: O(n^2) - worst case
-        int n = array.length; 
-        for (int i = 0; i < n - 1; i++)    // all elements checked after each other
-            for (int j = 0; j < n - 1; j++)    // single element moving through array
+        int n = array.length;
+        boolean swapped;   
+        for (int i = 0; i < n - 1; i++) {   // all elements checked after each other
+            swapped = false;    // improves best case from O(n^2) to O(n)
+            for (int j = 0; j < n - 1; j++) {   // single element moving through array
                 if ((array[j][0].compareTo(array[j + 1][0])) > 0) {
                     // swap current with next element
                     String temp[] = array[j];
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
+                    swapped = true;
                 }
+
+            }    
+            if (swapped == false) { // break out of loop if no swaps were made
+                break;
+            }
+        }    
         return array;
     }
-
 
     private static int[] bubbleSort(int[] array) {    // time complexity: O(n^2) - worst case
         int n = array.length;

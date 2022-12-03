@@ -4,13 +4,21 @@ import java.io.FileWriter;
 
 public class Helper {
     
-    public String[][] readCSV(String file, int rows) throws Exception{
+    public String[][] readCSV(String file) throws Exception{
         BufferedReader br = new BufferedReader(new FileReader(file));
+
+        int lineCount = 0;
+        while (br.readLine() != null)   {
+            lineCount++;
+        } 
+        // System.out.println(lineCount);
         int i = 0;
         String row = "";
-        String[][] persons = new String[rows][5];
+        String[][] persons = new String[10000][5];
+        br.close();
+        BufferedReader br2 = new BufferedReader(new FileReader(file));
 
-        while ((row = br.readLine()) != null)   {
+        while ((row = br2.readLine()) != null)   {
             String[] rowArray = row.split(",");
             persons[i] = rowArray;
 
@@ -24,7 +32,7 @@ public class Helper {
     public void write2dArrayToFile(String[][] array, String file) throws Exception  {
         FileWriter fw = new FileWriter(file);
 
-        fw.write('\n'); // potential not needed
+        fw.write('\n'); // potentially not needed
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 if (j == 4) {
@@ -54,10 +62,12 @@ public class Helper {
         fw.close();
     }
 
-    public void writeBenchmarkToFile(String[] results, double average, int runs) throws Exception    {
+    public void writeBenchmarkToFile(String[] results, double average, int runs, String bFile) throws Exception    {
         String file = "lib\\benchmark.txt";
         // addStringToFile(" ", file);
-        writeStringToFile("Benchmark Results after " + runs + " runs: " + '\n', file, false);
+        writeStringToFile("Benchmarked File: " + bFile, file, false);
+        writeStringToFile("------------------------------", file, true);
+        writeStringToFile("Results after " + runs + " runs: " + '\n', file, true);
         writeStringToFile(("Average: " + average + " seconds"), file, true);
         writeStringToFile("------------------------------", file, true);
         writeArrayToFile(results, file, true);  
@@ -80,8 +90,6 @@ public class Helper {
     }
     
     public void print2DArray(String[][] array) {
-        // System.out.print(array[0][0]);
-        // System.out.print(array[4][4]);
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 System.out.print(array[i][j] + "          ");
@@ -89,5 +97,9 @@ public class Helper {
             System.out.println();
         }
     }
-    
+
+    public String padRight(String content, int padLength) {
+        return String.format("%-" + padLength + "s", content);  
+   }
+
 }
