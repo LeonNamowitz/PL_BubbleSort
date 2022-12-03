@@ -16,8 +16,8 @@ public class Main {
         // double seconds = (double)time / 1_000_000_000.0;
         // System.out.println("Time: " + seconds + " seconds");
 
-        benchmark(3);
-        // test();
+        // benchmark(3);
+        test();
     }
     
 
@@ -44,13 +44,15 @@ public class Main {
         System.out.println("Done! ");
         helper.writeBenchmarkToFile(results, average, runs, file);
     }
-
+    
     public static void test() throws Exception  {
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        String namesArray[][] = helper.readCSV("lib\\test.csv");
+        // System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        String[][] namesArray = helper.readCSV("lib\\test.csv"); // adressdaten.csv
         System.out.println("-------------------------------------------");
-        bubbleSortNames(namesArray);
-        helper.print2DArray(namesArray);
+        bubbleSortNames(namesArray); // WHY IS THIS  WORKING ?? 
+        helper.write2dArrayToFile(namesArray, "lib\\output.csv"); // namesArray should not have been changed here ?
+        System.out.println("Done! ");
+        // helper.print2DArray(namesArray);
     }
 
 
@@ -59,9 +61,11 @@ public class Main {
 
     private static String[][] bubbleSortNames(String[][] array) {    // time complexity: O(n^2) - worst case
         int n = array.length;
-        boolean swapped;   
+        boolean swapped;  
+        String[][] array2 = new String[2][2];
+        int steps = 0; 
         for (int i = 0; i < n - 1; i++) {   // all elements checked after each other
-            swapped = false;    // improves best case from O(n^2) to O(n)
+            swapped = true;    // 'false' - improves best case from O(n^2) to O(n)
             for (int j = 0; j < n - 1; j++) {   // single element moving through array
                 if ((array[j][0].compareTo(array[j + 1][0])) > 0) {
                     // swap current with next element
@@ -70,13 +74,15 @@ public class Main {
                     array[j + 1] = temp;
                     swapped = true;
                 }
-
+                steps++;
             }    
             if (swapped == false) { // break out of loop if no swaps were made
                 break;
             }
-        }    
-        return array;
+        }
+        // System.out.println(helper.padRight(("Predicted steps: "), 20) + (n * n));
+        // System.out.println(helper.padRight(("Steps: "), 20) + "0" + steps);
+        return array2;
     }
 
     private static int[] bubbleSort(int[] array) {    // time complexity: O(n^2) - worst case

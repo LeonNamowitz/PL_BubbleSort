@@ -9,6 +9,8 @@
 
 ## ToDo
 
+* add a computational steps counter
+* refactor everything to arrayLists to avoid this nonsense
 * 
 
 

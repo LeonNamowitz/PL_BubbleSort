@@ -5,23 +5,23 @@ import java.io.FileWriter;
 public class Helper {
     
     public String[][] readCSV(String file) throws Exception{
-        BufferedReader br = new BufferedReader(new FileReader(file));
 
+        // ToDo: refactor everything to arrayLists to avoid this nonsense
+        BufferedReader br = new BufferedReader(new FileReader(file));
         int lineCount = 0;
         while (br.readLine() != null)   {
             lineCount++;
         } 
         // System.out.println(lineCount);
+
         int i = 0;
         String row = "";
         String[][] persons = new String[lineCount][5];
         br.close();
         BufferedReader br2 = new BufferedReader(new FileReader(file));
-
         while ((row = br2.readLine()) != null)   {
             String[] rowArray = row.split(",");
             persons[i] = rowArray;
-
             i++;
         }
         br.close();
@@ -32,7 +32,7 @@ public class Helper {
     public void write2dArrayToFile(String[][] array, String file) throws Exception  {
         FileWriter fw = new FileWriter(file);
 
-        fw.write('\n'); // potentially not needed
+        // fw.write('\n'); // potentially not needed
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 if (j == 4) {
