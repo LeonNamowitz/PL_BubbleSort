@@ -41,7 +41,6 @@ public class Helper {
 
     public void writeArrayToFile(String[] array, String file, Boolean append) throws Exception  {
         FileWriter fw = new FileWriter(file, append);
-
         fw.write('\n');
         for (String str : array) {
             fw.write(str + '\n');
@@ -61,7 +60,7 @@ public class Helper {
         writeStringToFile("Benchmark Results after " + runs + " runs: " + '\n', file, false);
         writeStringToFile(("Average: " + average + " seconds"), file, true);
         writeStringToFile("------------------------------", file, true);
-        writeArrayToFile(results, file, true);
+        writeArrayToFile(results, file, true);  
     }
 
 

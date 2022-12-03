@@ -15,6 +15,7 @@ public class Main {
         // System.out.println(Arrays.toString(arr));
         
         benchmark(3);
+        System.out.printf(null, args)
 
     }
     
@@ -31,7 +32,7 @@ public class Main {
             double seconds = (double)time / 1_000_000_000.0;
             System.out.println("Time: " + seconds + " seconds");
             sum += seconds;
-            results[i] = "Run " + (i + 1) + ": " + seconds + " seconds";
+            results[i] = "Run " + (i + 1) + ":  |  " + seconds + " seconds";    // @ToDo: format runs with same spacing
         }
         double average = (sum / runs);
         System.out.println("-------------------------");
