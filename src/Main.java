@@ -16,9 +16,9 @@ public class Main {
         // bubbleSort(arr);
         // System.out.println(Arrays.toString(arr));
         
-        // readCSV();
+        readCSV();
         // test();
-        
+
     }
     
 
@@ -54,7 +54,7 @@ public class Main {
         int n = array.length; // hopefully 10 ?
         for (int i = 0; i < n - 1; i++)    // all elements checked after each other
             for (int j = 0; j < n - 1; j++)    // single element moving through array
-                if (array[j][0] > array[j + 1][0]) {
+                if ((array[j][0].compareTo(array[j + 1][0])) < 0) {
                     // swap current with next element
                     String temp = array[j][0];
                     array[j][0] = array[j + 1][0];
