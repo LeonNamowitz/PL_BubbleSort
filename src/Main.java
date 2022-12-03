@@ -14,7 +14,10 @@ public class Main {
         // bubbleSort(arr);
         // System.out.println(Arrays.toString(arr));
         
-        for (int i = 0; i < 10; i++) {
+        int runs = 100;
+        double sum = 0;
+
+        for (int i = 0; i < runs; i++) {
             String namesArray[][] = helper.readCSV("lib\\adressdaten.csv", 10_000);
             long startTime = System.nanoTime();
             String[][] sorted = bubbleSortNames(namesArray);
@@ -22,14 +25,32 @@ public class Main {
             long time = endTime - startTime;
             double seconds = (double)time / 1_000_000_000.0;
             System.out.println("Time: " + seconds + " seconds");
+            sum += seconds;
         }
+        System.out.println("-------------------------");
+        System.out.println("Average: " + sum / runs);
 
-        // helper.writeFile(sorted);
 
     }
     
 
+    public static void benchmark(int runs) throws Exception  {
+        double sum = 0;
 
+        for (int i = 0; i < runs; i++) {
+            String namesArray[][] = helper.readCSV("lib\\adressdaten.csv", 10_000);
+            long startTime = System.nanoTime();
+            String[][] sorted = bubbleSortNames(namesArray);
+            long endTime = System.nanoTime();
+            long time = endTime - startTime;
+            double seconds = (double)time / 1_000_000_000.0;
+            System.out.println("Time: " + seconds + " seconds");
+            sum += seconds;
+        }
+        System.out.println("-------------------------");
+        System.out.println("Average: " + sum / runs);
+        // helper.writeFile(sorted);
+    }
 
     public static void test() throws Exception{
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
