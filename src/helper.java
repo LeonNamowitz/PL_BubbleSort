@@ -7,12 +7,12 @@ public class Helper {
     public String[][] readCSV(String file, int rows) throws Exception{
         BufferedReader br = new BufferedReader(new FileReader(file));
         int i = 0;
-        String line = "";
+        String row = "";
         String[][] persons = new String[rows][5];
 
-        while ((line = br.readLine()) != null)   {
-            String[] row = line.split(",");
-            persons[i] = row;
+        while ((row = br.readLine()) != null)   {
+            String[] rowArray = row.split(",");
+            persons[i] = rowArray;
 
             i++;
         }
@@ -21,10 +21,10 @@ public class Helper {
         return persons;
     }
 
-    public void writeFile(String[][] array) throws Exception  {
-        FileWriter fw = new FileWriter("lib\\output.csv");
+    public void write2dArrayToFile(String[][] array, String file) throws Exception  {
+        FileWriter fw = new FileWriter(file);
 
-        fw.write("TESTSSSSSSSSSSS" + '\n');
+        fw.write('\n'); // potential not needed
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 if (j == 4) {
@@ -36,9 +36,32 @@ public class Helper {
             }
             fw.write('\n');
         }
-
-
         fw.close();
+    }
+
+    public void writeArrayToFile(String[] array, String file, Boolean append) throws Exception  {
+        FileWriter fw = new FileWriter(file, append);
+
+        fw.write('\n');
+        for (String str : array) {
+            fw.write(str + '\n');
+        }
+        fw.close();
+    }
+
+    public void writeStringToFile(String content, String file, Boolean append) throws Exception  {
+        FileWriter fw = new FileWriter(file, append); // true flag to append instead of overwrite file
+        fw.append(content + '\n');
+        fw.close();
+    }
+
+    public void writeBenchmarkToFile(String[] results, double average, int runs) throws Exception    {
+        String file = "lib\\benchmark.txt";
+        // addStringToFile(" ", file);
+        writeStringToFile("Benchmark Results after " + runs + " runs: " + '\n', file, false);
+        writeStringToFile(("Average: " + average + " seconds"), file, true);
+        writeStringToFile("------------------------------", file, true);
+        writeArrayToFile(results, file, true);
     }
 
 

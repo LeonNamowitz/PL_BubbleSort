@@ -14,45 +14,33 @@ public class Main {
         // bubbleSort(arr);
         // System.out.println(Arrays.toString(arr));
         
-        int runs = 100;
-        double sum = 0;
-
-        for (int i = 0; i < runs; i++) {
-            String namesArray[][] = helper.readCSV("lib\\adressdaten.csv", 10_000);
-            long startTime = System.nanoTime();
-            String[][] sorted = bubbleSortNames(namesArray);
-            long endTime = System.nanoTime();
-            long time = endTime - startTime;
-            double seconds = (double)time / 1_000_000_000.0;
-            System.out.println("Time: " + seconds + " seconds");
-            sum += seconds;
-        }
-        System.out.println("-------------------------");
-        System.out.println("Average: " + sum / runs);
-
+        benchmark(3);
 
     }
     
 
     public static void benchmark(int runs) throws Exception  {
         double sum = 0;
-
+        String[] results = new String[runs];
         for (int i = 0; i < runs; i++) {
             String namesArray[][] = helper.readCSV("lib\\adressdaten.csv", 10_000);
-            long startTime = System.nanoTime();
-            String[][] sorted = bubbleSortNames(namesArray);
+            long startTime = System.nanoTime(); 
+            bubbleSortNames(namesArray);
             long endTime = System.nanoTime();
             long time = endTime - startTime;
             double seconds = (double)time / 1_000_000_000.0;
             System.out.println("Time: " + seconds + " seconds");
             sum += seconds;
+            results[i] = "Run " + (i + 1) + ": " + seconds + " seconds";
         }
+        double average = (sum / runs);
         System.out.println("-------------------------");
-        System.out.println("Average: " + sum / runs);
-        // helper.writeFile(sorted);
+        System.out.println("Average: " + average);
+
+        helper.writeBenchmarkToFile(results, average, runs);
     }
 
-    public static void test() throws Exception{
+    public static void test() throws Exception  {
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         String namesArray[][] = helper.readCSV("lib\\test.csv", 10);
         System.out.println("-------------------------------------------");

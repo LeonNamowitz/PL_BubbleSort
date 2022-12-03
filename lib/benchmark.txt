@@ -1,0 +1,8 @@
+Benchmark Results after 3 runs: 
+
+Average: 1.9748683666666667 seconds
+------------------------------
+
+Run 1: 1.9487305 seconds
+Run 2: 2.163164 seconds
+Run 3: 1.8127106 seconds
