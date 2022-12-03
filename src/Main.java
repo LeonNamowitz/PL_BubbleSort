@@ -11,11 +11,15 @@ public class Main {
         // int[] arr = createArray(120);
         // System.out.println(Arrays.toString(arr));
         // System.out.println("Sorted Array: ");
-        // bubbleSort(arr);
-        // System.out.println(Arrays.toString(arr));
-        
-        benchmark(3);
-        System.out.printf(null, args)
+        long startTime = System.nanoTime();
+        bubbleSortLists(unsortedArray);
+        long endTime = System.nanoTime();
+        long time = endTime - startTime;
+        double seconds = (double)time / 1_000_000_000.0;
+        System.out.println("Time: " + seconds + " seconds");
+
+        // benchmark(3);
+        // System.out.print
 
     }
     
