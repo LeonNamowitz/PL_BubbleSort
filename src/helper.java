@@ -14,7 +14,7 @@ public class Helper {
         // System.out.println(lineCount);
         int i = 0;
         String row = "";
-        String[][] persons = new String[10000][5];
+        String[][] persons = new String[lineCount][5];
         br.close();
         BufferedReader br2 = new BufferedReader(new FileReader(file));
 
