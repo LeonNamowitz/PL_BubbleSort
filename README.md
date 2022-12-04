@@ -10,7 +10,7 @@
 ## ToDo
 
 *
-* refactor everything to arrayLists to avoid this nonsense
+* refactor everything to arrayLists to avoid this nonsense  -  Helper.java @ln 9
   * actually do both and compare the performance
 
 * clean-up bullshit

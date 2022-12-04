@@ -7,6 +7,7 @@ public class Helper {
     public String[][] readCSV(String file) throws Exception{
 
         // ToDo: refactor everything to arrayLists to avoid this nonsense
+
         BufferedReader br = new BufferedReader(new FileReader(file));
         int lineCount = 0;
         while (br.readLine() != null)   {
@@ -73,7 +74,7 @@ public class Helper {
         writeArrayToFile(results, file, true);  
     }
 
-
+    @Deprecated
     public int[] createArray(int size) {
         int[] array = new int[size];
         for (int i = 0; i < array.length; i++) {
@@ -81,7 +82,7 @@ public class Helper {
         }
         return array;
     }
-
+    
     public void printArray(int[] array) {
         for (int i = 0; i < array.length -1; i++) {
             System.out.print(array[i] + " ");
