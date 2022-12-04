@@ -9,10 +9,11 @@
 
 ## ToDo
 
-* add a computational steps counter
+*
 * refactor everything to arrayLists to avoid this nonsense
-* 
+  * actually do both and compare the performance
 
+* clean-up bullshit
 
 
 
