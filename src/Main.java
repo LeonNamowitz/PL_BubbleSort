@@ -121,30 +121,45 @@ public class Main {
 
 
     private static int[] bubbleSort(int[] array) {    // time complexity: O(n^2) - worst case
+        boolean swapped;    // prevent alg from going through a sorted array
         int n = array.length;
-        for (int i = 0; i < n - 1; i++)    // all elements checked after each other
-            for (int j = 0; j < n - 1; j++)    // single element moving through array
-                if (array[j] > array[j + 1]) {
-                    // swap current with next element
-                    int temp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = temp;
+        for (int i = 0; i < n - 1; i++) {               // all elements checked after each other
+            swapped = false;
+            for (int j = 0; j < n - 1; j++) {           // single element + remaining ones moving through array
+                if (array[j] > array[j + 1]) {          // 1. find the first element that is smaller than its neighbour
+                    int temp = array[j];                // 2. swap it with the next element
+                    array[j] = array[j + 1];            // 3. move the same element to the right until the neighbour is bigger 
+                    array[j + 1] = temp;                // 4. then check if the remaining elements can be moved
+                    swapped = true;
                 }
+            }
+            if (!swapped)
+                break;
+        }
         return array;
     }
 
+    // "Bubble sort also interacts poorly with modern CPU hardware. 
+    // It requires at least twice as many writes as insertion sort, twice as many cache misses, and asymptotically more branch mispredictions. 
+    // Experiments by Astrachan sorting strings in Java show bubble sort to be roughly 5 times slower than insertion sort and 40% slower than selection sort"
+    // Source: https://en.wikipedia.org/wiki/Bubble_sort
+    // https://youtu.be/m4yVlPqeZwo?t=1400
     private static LinkedList<Integer> bubbleSortLists(LinkedList<Integer> array) {    // time complexity: O(n^2) - worst case
+        boolean swapped;
         int n = array.size();
-        for (int i = 0; i < n - 1; i++)    // all elements checked after each other
-            for (int j = 0; j < n - 1; j++)    // single element moving through array
+        for (int i = 0; i < n - 1; i++) {    // all elements checked after each other
+            swapped = false;
+            for (int j = 0; j < n - 1; j++) {    // single element moving through array
                 if (array.get(j) > array.get(j + 1)) {
                     // swap current with next element
                     int temp = array.get(j);
                     array.set(j, array.get(j + 1));
                     array.set(j + 1, temp);
                 }
+            }
+            if (!swapped)
+                break;
+        }
         return array;
     }
-
- 
 }
