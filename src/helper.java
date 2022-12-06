@@ -30,7 +30,7 @@ public class Helper {
         return persons;
     }
 
-    public void write2dArrayToFile(String[][] array, String file) throws Exception  {
+    public void writeCSV(String[][] array, String file) throws Exception  {
         FileWriter fw = new FileWriter(file);
 
         // fw.write('\n'); // potentially not needed

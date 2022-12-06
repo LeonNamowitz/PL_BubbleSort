@@ -53,7 +53,7 @@ public class Main {
         System.out.println("-------------------------------------------");
         String[][] sortedArray = (String[][]) bubbleSortNames(namesArray, false).get(0);   // very much not typesafe !!!
 
-        helper.write2dArrayToFile(sortedArray, "lib\\output.csv"); 
+        helper.writeCSV(sortedArray, "lib\\output.csv"); 
         System.out.println("Done! ");
         // helper.print2DArray(namesArray);
     }
