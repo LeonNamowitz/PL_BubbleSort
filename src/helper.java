@@ -4,6 +4,8 @@ import java.io.FileWriter;
 
 public class Helper {
     
+    Boolean printDone = false;
+
     public String[][] readCSV(String file) throws Exception{
 
         // ToDo: refactor everything to arrayLists to avoid this nonsense
@@ -102,5 +104,15 @@ public class Helper {
     public String padRight(String content, int padLength) {
         return String.format("%-" + padLength + "s", content);  
    }
+
+    public void printSteps(int steps) {
+        
+        if (!printDone)  {
+            String temp = ("Steps: " + steps);
+            System.out.println(temp);
+            System.out.println("-------------------------");
+            printDone = true;
+        }
+    }
 
 }

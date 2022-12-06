@@ -30,14 +30,14 @@ public class Main {
         for (int i = 0; i < runs; i++) {
             String namesArray[][] = helper.readCSV(file);
             long startTime = System.nanoTime(); 
-            int steps = (int) bubbleSortNames(namesArray, false).get(1);   // very much not typesafe !!!
+            namesArray = bubbleSortNames(namesArray, false);  
             long endTime = System.nanoTime();
             long time = endTime - startTime;
             double seconds = (double)time / 1_000_000_000.0;
             System.out.println("Time: " + seconds + " seconds");
             sum += seconds;
 
-            String temp = (helper.padRight("Run " + (i + 1) + ":", 10) + "|  " + seconds + " seconds" + "  |  " + "Steps: " + steps); // we don't talk about this
+            String temp = (helper.padRight("Run " + (i + 1) + ":", 10) + "|  " + seconds + " seconds"); // we don't talk about this
             results[i] = temp;
         }
         double average = (sum / runs);
@@ -51,7 +51,7 @@ public class Main {
         // System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         String[][] namesArray = helper.readCSV("lib\\test.csv"); // adressdaten.csv
         System.out.println("-------------------------------------------");
-        String[][] sortedArray = (String[][]) bubbleSortNames(namesArray, false).get(0);   // very much not typesafe !!!
+        String[][] sortedArray = bubbleSortNames(namesArray, false);   
 
         helper.writeCSV(sortedArray, "lib\\output.csv"); 
         System.out.println("Done! ");
@@ -62,11 +62,10 @@ public class Main {
     //////////////////////////////////// BUBBLE SORT ////////////////////////////////////
 
 
-    private static ArrayList<Object> bubbleSortNames(String[][] array, Boolean notImproved) {    // time complexity: O(n^2) - worst case
+    private static String[][] bubbleSortNames(String[][] array, Boolean notImproved) {    // time complexity: O(n^2) - worst case
         int n = array.length;
         boolean swapped;  
         int steps = 0; 
-        ArrayList<Object> arrayPlusSteps = new ArrayList<Object>(); // funky workaround to return 2 different things
         for (int i = 0; i < n - 1; i++) {   // all elements checked after each other
             swapped = notImproved;    // 'false' - improves best case from O(n^2) to O(n)
             for (int j = 0; j < n - 1; j++) {   // single element moving through array
@@ -83,11 +82,8 @@ public class Main {
                 break;
             }
         }
-        arrayPlusSteps.add(array);  // don't do this at home
-        arrayPlusSteps.add(steps);  // really don't
-        // System.out.println(helper.padRight(("Predicted steps: "), 20) + (n * n));
-        // System.out.println(helper.padRight(("Steps: "), 20) + "0" + (steps + 1));
-        return arrayPlusSteps;
+        helper.printSteps(steps);
+        return array;
     }
 
     private static int[] bubbleSort(int[] array) {    // time complexity: O(n^2) - worst case
