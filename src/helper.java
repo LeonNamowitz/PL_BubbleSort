@@ -114,5 +114,4 @@ public class Helper {
             printDone = true;
         }
     }
-
 }
