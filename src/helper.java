@@ -7,7 +7,7 @@ public class Helper {
     
     Boolean printDone = false;
 
-    public String[][] readCSV(String file, Boolean print) throws Exception {
+    public String[][] readCSVtoArray(String file) throws Exception {
 
         // Have to go over the file twice to avoid hardcoding the array size
 
@@ -17,6 +17,7 @@ public class Helper {
             lineCount++;
         } 
         // System.out.println(lineCount);
+        br.close();
 
         int i = 0;
         String row = "";
@@ -29,14 +30,12 @@ public class Helper {
             i++;
             // System.out.println("Line " + i + " read");
         }
-        br.close();
-        if (print) {
-            print2DArray(persons);
-        }
+        br2.close();
+
         return persons;
     }
 
-    public ArrayList<String[]> readCSV(String file) throws Exception    {
+    public ArrayList<String[]> readCSVtoList(String file) throws Exception    {
         ArrayList<String[]> persons = new ArrayList<String[]>();
         BufferedReader br = new BufferedReader(new FileReader(file));
         int i = 0;
@@ -52,7 +51,6 @@ public class Helper {
 
     public void writeCSV(ArrayList<String[]> array, String file) throws Exception  {
         FileWriter fw = new FileWriter(file);
-
         // fw.write('\n'); // potentially not needed
         for (int i = 0; i < array.size(); i++) {
             for (int j = 0; j < array.get(i).length; j++) {
@@ -70,7 +68,6 @@ public class Helper {
 
     public void writeCSV(String[][] array, String file) throws Exception  {
         FileWriter fw = new FileWriter(file);
-
         // fw.write('\n'); // potentially not needed
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {

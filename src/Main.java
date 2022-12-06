@@ -28,7 +28,7 @@ public class Main {
         String[] results = new String[runs];
         
         for (int i = 0; i < runs; i++) {
-            ArrayList<String[]> unsortedArray = helper.readCSV(file);
+            ArrayList<String[]> unsortedArray = helper.readCSVtoList(file);
             long startTime = System.nanoTime(); 
             bubbleSortNames(unsortedArray, notImproved);  
             long endTime = System.nanoTime();
@@ -49,8 +49,8 @@ public class Main {
     
     public static void test() throws Exception  {
         // System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        String[][] namesArray = helper.readCSV("lib\\test.csv", false); // adressdaten.csv
-        System.out.println("-------------------------------------------");
+        String[][] namesArray = helper.readCSVtoArray("lib\\test.csv"); // adressdaten.csv
+        System.out.println("-------------------------");
         String[][] sortedArray = bubbleSortNames(namesArray, false);   
 
         helper.writeCSV(sortedArray, "lib\\output.csv"); 
@@ -61,24 +61,48 @@ public class Main {
 
     //////////////////////////////////// BUBBLE SORT ////////////////////////////////////
 
-
-    private static ArrayList<String[]> bubbleSortNames(ArrayList<String[]> array, Boolean notImproved) {    // time complexity: O(n^2) - worst case
-        int n = array.size();   // @ToDo maybe foreach?
+    // ArrayList version
+    private static ArrayList<String[]> bubbleSortNames(ArrayList<String[]> arrayL, Boolean notImproved) {    // time complexity: O(n^2) - worst case
+        int n = arrayL.size();   
         boolean swapped;  
         int steps = 0; 
         for (int i = 0; i < n - 1; i++) {   // all elements checked after each other
             swapped = notImproved;    // 'false' - improves best case from O(n^2) to O(n)
             for (int j = 0; j < n - 1; j++) {   // single element moving through array
-                if ((array.get(j)[0].compareTo(array.get(j + 1)[0])) > 0) {
+                if ((arrayL.get(j)[0].compareTo(arrayL.get(j + 1)[0])) > 0) {
                     // swap current with next element
-                    String temp[] = array.get(j);
-                    array.set(j, array.get(j + 1));
-                    array.set(j + 1, temp);
+                    String temp[] = arrayL.get(j);
+                    arrayL.set(j, arrayL.get(j + 1));
+                    arrayL.set(j + 1, temp);
                     swapped = true;
                 }
                 steps++;
             }    
             if (swapped == false) { // break out of loop if no swaps were made
+                break;
+            }
+        }
+        helper.printSteps(steps);
+        return arrayL;
+    }
+
+    // Array only version
+    private static String[][] bubbleSortNames(String[][] array, Boolean notImproved) { 
+        int n = array.length;
+        boolean swapped;  
+        int steps = 0; 
+        for (int i = 0; i < n - 1; i++) {  
+            swapped = notImproved;    
+            for (int j = 0; j < n - 1; j++) {  
+                if ((array[j][0].compareTo(array[j + 1][0])) > 0) {
+                    String temp[] = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                    swapped = true;
+                }
+                steps++;
+            }    
+            if (swapped == false) {
                 break;
             }
         }
