@@ -1,12 +1,14 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.LinkedList;
 
 public class Helper {
     
     Boolean printDone = false;
 
-    public String[][] readCSV(String file) throws Exception{
+    @Deprecated
+    public String[][] readCSV(String file) throws Exception {
 
         // ToDo: refactor everything to arrayLists to avoid this nonsense
 
@@ -31,6 +33,21 @@ public class Helper {
         // print2DArray(persons);
         return persons;
     }
+
+    public LinkedList<String[]> readCSVtest(String file) throws Exception    {
+        LinkedList<String[]> persons = new LinkedList<String[]>();
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        int i = 0;
+        String row = "";
+        while ((row = br.readLine()) != null)  {
+            String[] rowArray = row.split(",");
+            persons.add(rowArray);
+            i++;
+        }
+        br.close();
+        return persons;
+    }
+
 
     public void writeCSV(String[][] array, String file) throws Exception  {
         FileWriter fw = new FileWriter(file);
