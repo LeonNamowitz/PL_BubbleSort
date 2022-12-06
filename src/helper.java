@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Helper {
@@ -34,8 +35,8 @@ public class Helper {
         return persons;
     }
 
-    public LinkedList<String[]> readCSVtest(String file) throws Exception    {
-        LinkedList<String[]> persons = new LinkedList<String[]>();
+    public ArrayList<String[]> readCSVtest(String file) throws Exception    {
+        ArrayList<String[]> persons = new ArrayList<String[]>();
         BufferedReader br = new BufferedReader(new FileReader(file));
         int i = 0;
         String row = "";
@@ -43,11 +44,29 @@ public class Helper {
             String[] rowArray = row.split(",");
             persons.add(rowArray);
             i++;
+            // System.out.println("Line " + i + " read");
         }
         br.close();
         return persons;
     }
 
+    public void writeCSVtest(ArrayList<String[]> array, String file) throws Exception  {
+        FileWriter fw = new FileWriter(file);
+
+        // fw.write('\n'); // potentially not needed
+        for (int i = 0; i < array.size(); i++) {
+            for (int j = 0; j < array.get(i).length; j++) {
+                if (j == 4) {
+                    fw.write(array.get(i)[j]);
+                }
+                else {
+                    fw.write(array.get(i)[j] + ",");
+                }
+            }
+            fw.write('\n');
+        }
+        fw.close();
+    }
 
     public void writeCSV(String[][] array, String file) throws Exception  {
         FileWriter fw = new FileWriter(file);
