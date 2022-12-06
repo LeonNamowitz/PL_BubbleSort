@@ -2,16 +2,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Helper {
     
     Boolean printDone = false;
 
-    @Deprecated
-    public String[][] readCSV(String file) throws Exception {
+    public String[][] readCSV(String file, Boolean print) throws Exception {
 
-        // ToDo: refactor everything to arrayLists to avoid this nonsense
+        // Have to go over the file twice to avoid hardcoding the array size
 
         BufferedReader br = new BufferedReader(new FileReader(file));
         int lineCount = 0;
@@ -29,13 +27,16 @@ public class Helper {
             String[] rowArray = row.split(",");
             persons[i] = rowArray;
             i++;
+            // System.out.println("Line " + i + " read");
         }
         br.close();
-        // print2DArray(persons);
+        if (print) {
+            print2DArray(persons);
+        }
         return persons;
     }
 
-    public ArrayList<String[]> readCSVtest(String file) throws Exception    {
+    public ArrayList<String[]> readCSV(String file) throws Exception    {
         ArrayList<String[]> persons = new ArrayList<String[]>();
         BufferedReader br = new BufferedReader(new FileReader(file));
         int i = 0;
@@ -44,13 +45,12 @@ public class Helper {
             String[] rowArray = row.split(",");
             persons.add(rowArray);
             i++;
-            // System.out.println("Line " + i + " read");
         }
         br.close();
         return persons;
     }
 
-    public void writeCSVtest(ArrayList<String[]> array, String file) throws Exception  {
+    public void writeCSV(ArrayList<String[]> array, String file) throws Exception  {
         FileWriter fw = new FileWriter(file);
 
         // fw.write('\n'); // potentially not needed

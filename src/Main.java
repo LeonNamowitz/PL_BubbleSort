@@ -17,20 +17,20 @@ public class Main {
         // double seconds = (double)time / 1_000_000_000.0;
         // System.out.println("Time: " + seconds + " seconds");
 
-        benchmark(3);
+        benchmark(3, false);
         // test();
     }
     
 
-    public static void benchmark(int runs) throws Exception  {
+    public static void benchmark(int runs, Boolean notImproved) throws Exception  {
         double sum = 0;
         String file = "lib\\adressdaten.csv";   // adressdaten.csv
         String[] results = new String[runs];
         
         for (int i = 0; i < runs; i++) {
-            ArrayList<String[]> namesArray = helper.readCSVtest(file);
+            ArrayList<String[]> unsortedArray = helper.readCSV(file);
             long startTime = System.nanoTime(); 
-            namesArray = bubbleSortNames(namesArray, false);  
+            bubbleSortNames(unsortedArray, notImproved);  
             long endTime = System.nanoTime();
             long time = endTime - startTime;
             double seconds = (double)time / 1_000_000_000.0;
@@ -42,22 +42,21 @@ public class Main {
         }
         double average = (sum / runs);
         System.out.println("-------------------------");
-        // System.out.println("Average: " + average);
+        System.out.println("Average: " + average);
         System.out.println("Done! ");
-        // helper.writeCSVtest(namesArray, "lib\\output.csv");
         helper.writeBenchmarkToFile(results, average, runs, file);
     }
     
-    // public static void test() throws Exception  {
-    //     // System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    //     String[][] namesArray = helper.readCSV("lib\\test.csv"); // adressdaten.csv
-    //     System.out.println("-------------------------------------------");
-    //     String[][] sortedArray = bubbleSortNames(namesArray, false);   
+    public static void test() throws Exception  {
+        // System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        String[][] namesArray = helper.readCSV("lib\\test.csv", false); // adressdaten.csv
+        System.out.println("-------------------------------------------");
+        String[][] sortedArray = bubbleSortNames(namesArray, false);   
 
-    //     helper.writeCSV(sortedArray, "lib\\output.csv"); 
-    //     System.out.println("Done! ");
-    //     // helper.print2DArray(namesArray);
-    // }
+        helper.writeCSV(sortedArray, "lib\\output.csv"); 
+        System.out.println("Done! ");
+        // helper.print2DArray(namesArray);
+    }
 
 
     //////////////////////////////////// BUBBLE SORT ////////////////////////////////////
