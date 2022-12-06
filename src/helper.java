@@ -98,15 +98,15 @@ public class Helper {
         fw.close();
     }
 
-    public void writeBenchmarkToFile(String[] results, double average, int runs, String bFile) throws Exception    {
-        String file = "lib\\benchmark.txt";
+    public void writeBenchmarkToFile(String[] results, double average, int runs, String dataFile) throws Exception    {
+        String benchFile = "lib\\benchmark.txt";
         // addStringToFile(" ", file);
-        writeStringToFile("Benchmarked File: " + bFile, file, false);
-        writeStringToFile("------------------------------", file, true);
-        writeStringToFile("Results after " + runs + " runs: " + '\n', file, true);
-        writeStringToFile(("Average: " + average + " seconds"), file, true);
-        writeStringToFile("------------------------------", file, true);
-        writeArrayToFile(results, file, true);  
+        writeStringToFile("Benchmarked File: " + dataFile, benchFile, false);
+        writeStringToFile("------------------------------", benchFile, true);
+        writeStringToFile("Results after " + runs + " runs: " + '\n', benchFile, true);
+        writeStringToFile(("Average: " + average + " seconds"), benchFile, true);
+        writeStringToFile("------------------------------", benchFile, true);
+        writeArrayToFile(results, benchFile, true);  
     }
 
     @Deprecated

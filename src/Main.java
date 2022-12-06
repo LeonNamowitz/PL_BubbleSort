@@ -24,11 +24,11 @@ public class Main {
 
     public static void benchmark(int runs, Boolean notImproved) throws Exception  {
         double sum = 0;
-        String file = "lib\\adressdaten.csv";   // adressdaten.csv
+        String dataFile = "lib\\adressdaten.csv";   // adressdaten.csv
         String[] results = new String[runs];
         
         for (int i = 0; i < runs; i++) {
-            ArrayList<String[]> unsortedArray = helper.readCSVtoList(file);
+            ArrayList<String[]> unsortedArray = helper.readCSVtoList(dataFile);
             long startTime = System.nanoTime(); 
             bubbleSortNames(unsortedArray, notImproved);  
             long endTime = System.nanoTime();
@@ -44,7 +44,7 @@ public class Main {
         System.out.println("-------------------------");
         System.out.println("Average: " + average);
         System.out.println("Done! ");
-        helper.writeBenchmarkToFile(results, average, runs, file);
+        helper.writeBenchmarkToFile(results, average, runs, dataFile);
     }
     
     public static void test() throws Exception  {
@@ -76,6 +76,7 @@ public class Main {
                     arrayL.set(j + 1, temp);
                     swapped = true;
                 }
+
                 steps++;
             }    
             if (swapped == false) { // break out of loop if no swaps were made
@@ -100,6 +101,14 @@ public class Main {
                     array[j + 1] = temp;
                     swapped = true;
                 }
+                if ((array[j][0].compareTo(array[j + 1][0])) == 0)   {
+                    if ((array[j][1].compareTo(array[j + 1][1])) > 0) {
+                        String temp[] = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = temp;
+                        swapped = true;
+                    }
+                }
                 steps++;
             }    
             if (swapped == false) {
@@ -109,6 +118,7 @@ public class Main {
         helper.printSteps(steps);
         return array;
     }
+
 
     private static int[] bubbleSort(int[] array) {    // time complexity: O(n^2) - worst case
         int n = array.length;
