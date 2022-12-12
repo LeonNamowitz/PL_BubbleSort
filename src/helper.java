@@ -1,12 +1,14 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Helper {
 
+    static DecimalFormat df = new DecimalFormat("#");
+
     private Helper(){}; // Prevents instantiation
-    
     // Boolean printDone = false;
 
     public static String[][] readCSVtoArray(String file) throws Exception {
@@ -98,6 +100,7 @@ public class Helper {
         fw.close();
     }
 
+    @Deprecated
     public static void writeBenchmarkToFile(String[] results, double average, int runs, String dataFile) throws Exception    {
         String benchFile = "lib\\benchmark.txt";
         // addStringToFile(" ", file);
@@ -110,6 +113,12 @@ public class Helper {
         writeStringToFile(" ", benchFile, true);
         writeStringToFile("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ", benchFile, true);
         writeStringToFile(" ", benchFile, true);
+    }
+    
+    public static void writeBench(SortingAlgorithm alg, long steps, double time) throws Exception   {
+        String benchFile = "lib\\bench.csv";
+        df.setMaximumFractionDigits(8);
+        writeStringToFile(alg.getName() + "," + df.format(steps) + "," + time, benchFile, true);
     }
     
     public static void printArray(int[] array) {

@@ -1,9 +1,10 @@
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Locale;
 
 public class Benchmark {
 
-    SortingAlgorithm bubbleSort = new BubbleSort();
-    SortingAlgorithm bubbleSortImproved = new BubbleSortImproved();
+    private static DecimalFormat df = new DecimalFormat("");
 
     private static final int WARM_UPS = 0;
     private static final int ITERATIONS = 1;
@@ -45,21 +46,29 @@ public class Benchmark {
 
     private void test(SortingAlgorithm algorithm, InputOrder inputOrder, int[] array, boolean warmUp) {
         System.out.printf("%n--- %s (order: %s) ---%n", algorithm.getName(), inputOrder);
-        long time = runAndMeasure(algorithm, array);
+        double time = runAndMeasure(algorithm, array);
     }
 
 
-    private long runAndMeasure(SortingAlgorithm alg, int[] array) {
-        long start = System.nanoTime();
+    private double runAndMeasure(SortingAlgorithm alg, int[] array) {
+        double start = System.nanoTime();
         long steps = alg.sort(array);
-        long end = System.nanoTime();
-        long duration = end - start;
-        long seconds = duration / 1000000000;
-        System.out.printf("%s took %d steps and %d seconds%n", alg.getName(), steps, seconds);
+        double end = System.nanoTime();
+        double duration = end - start;
+        double seconds = duration / 1000000000;
+        String stepsF = df.format(new BigDecimal(steps));
+        System.out.printf("%s took %s steps and %f seconds%n", alg.getName(), stepsF, seconds);
+        try {
+            Helper.writeBench(alg, steps, seconds);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return duration;
     }
 
-
+    private void writeBench() {
+        
+    }
 
     private enum InputOrder {
         RANDOM(false),
