@@ -2,9 +2,25 @@ Benchmarked File: lib\adressdaten.csv
 ------------------------------
 Results after 3 runs: 
 
-Average: 2.2162035333333336 seconds
+Average: 4.6362129 seconds
 ------------------------------
 
-Run 1:    |  2.2013565 seconds
-Run 2:    |  2.1669045 seconds
-Run 3:    |  2.2803496 seconds
+Run 1:    |  6.3714317 seconds
+Run 2:    |  3.4404943 seconds
+Run 3:    |  4.0967127 seconds
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+ 
+Benchmarked File: lib\adressdaten.csv
+------------------------------
+Results after 3 runs: 
+
+Average: 2.3497873333333335 seconds
+------------------------------
+
+Run 1:    |  1.949783 seconds
+Run 2:    |  2.8600466 seconds
+Run 3:    |  2.2395324 seconds
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+ 

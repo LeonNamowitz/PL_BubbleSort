@@ -17,8 +17,9 @@ public class Main {
         // double seconds = (double)time / 1_000_000_000.0;
         // System.out.println("Time: " + seconds + " seconds");
 
-        // benchmark(3, false);
-        test();
+        benchmark(3, false);
+        benchmark(3, false);
+        // test();
     }
     
 
