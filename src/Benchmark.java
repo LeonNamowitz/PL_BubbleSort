@@ -1,13 +1,13 @@
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.Locale;
 
 public class Benchmark {
 
     private static DecimalFormat df = new DecimalFormat("");
 
+    private static final Boolean DEBUG = false;
     private static final int WARM_UPS = 0;
-    private static final int ITERATIONS = 1;
+    private static final int ITERATIONS = 10;
     private static final int LIMIT = 20_000;
 
     static final SortingAlgorithm[] ALGORITHMS = {
@@ -24,14 +24,18 @@ public class Benchmark {
 
     private void run() {
         for (int i = 0; i < WARM_UPS; i++) {
-            System.out.printf("%n===== Warm up %d of %d =====%n", i, WARM_UPS);
+            if (DEBUG) {
+                System.out.printf("%n===== Warm up %d of %d =====%n", i, WARM_UPS);
+            }
             for (SortingAlgorithm algorithm : ALGORITHMS) {
                 test(algorithm, true);
             }
         }
 
         for (int i = 0; i < ITERATIONS ; i++) {
-            System.out.printf("%n===== Iteration %d =====%n", i);
+            if (DEBUG) {
+                System.out.printf("%n===== Iteration %d =====%n", i);
+            }
             for (SortingAlgorithm algorithm : ALGORITHMS) {
               test(algorithm, false);
             }
@@ -45,19 +49,25 @@ public class Benchmark {
     }
 
     private void test(SortingAlgorithm algorithm, InputOrder inputOrder, int[] array, boolean warmUp) {
-        System.out.printf("%n--- %s (order: %s) ---%n", algorithm.getName(), inputOrder);
-        double time = runAndMeasure(algorithm, array, inputOrder);
+        if (DEBUG)
+            System.out.printf("%n--- %s (order: %s) ---%n", algorithm.getName(), inputOrder);
+        double time = runAndMeasure(algorithm, array, inputOrder, warmUp);
     }
 
 
-    private double runAndMeasure(SortingAlgorithm alg, int[] array, InputOrder inputOrder) {
+    private double runAndMeasure(SortingAlgorithm alg, int[] array, InputOrder inputOrder, Boolean warmUp) {
         double start = System.nanoTime();
         long steps = alg.sort(array);
         double end = System.nanoTime();
         double duration = end - start;
         double seconds = duration / 1000000000;
-        String stepsF = df.format(new BigDecimal(steps));
-        System.out.printf("%s took %s steps and %f seconds%n", alg.getName(), stepsF, seconds);
+        if (DEBUG) {
+            String stepsF = df.format(new BigDecimal(steps));
+            System.out.printf("%s took %s steps and %f seconds%n", alg.getName(), stepsF, seconds);
+        }
+        if (warmUp) {
+            return duration;
+        }
         try {
             Helper.writeBench(alg, inputOrder, array.length, steps, seconds);
         } catch (Exception e) {

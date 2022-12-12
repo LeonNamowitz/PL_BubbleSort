@@ -115,6 +115,11 @@ public class Helper {
     
     public static void writeBench(SortingAlgorithm alg, Benchmark.InputOrder inputOrder, int sample, long steps, double time) throws Exception   {
         String benchFile = "lib\\bench.csv";
+        BufferedReader br = new BufferedReader(new FileReader(benchFile));     
+        if (br.readLine() == null) {
+            writeStringToFile("Name" + "," + "Data order" + "," + "Sample size" + "," + "Steps" + "," + "Time in s", benchFile, false);
+        }
+        br.close();
         String seconds = String.format("%.6f", time);
         writeStringToFile(alg.getName() + "," + inputOrder + "," + sample + "," + steps + "," + seconds, benchFile, true);
     }
