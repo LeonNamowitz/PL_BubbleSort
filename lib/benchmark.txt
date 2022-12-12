@@ -81,3 +81,69 @@ Run 1:    |  2.2455048 seconds
  
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
  
+Benchmarked File: lib\adressdaten.csv
+------------------------------
+Results after 1 runs: 
+
+Average: 1.9591411 seconds
+------------------------------
+
+Run 1:    |  1.9591411 seconds
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+ 
+Benchmarked File: lib\adressdaten.csv
+------------------------------
+Results after 1 runs: 
+
+Average: 2.1938067 seconds
+------------------------------
+
+Run 1:    |  2.1938067 seconds
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+ 
+Benchmarked File: lib\adressdaten.csv
+------------------------------
+Results after 1 runs: 
+
+Average: 2.3091655 seconds
+------------------------------
+
+Run 1:    |  2.3091655 seconds
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+ 
+Benchmarked File: lib\adressdaten.csv
+------------------------------
+Results after 1 runs: 
+
+Average: 2.3242402 seconds
+------------------------------
+
+Run 1:    |  2.3242402 seconds
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+ 
+Benchmarked File: lib\adressdaten.csv
+------------------------------
+Results after 1 runs: 
+
+Average: 1.8655427 seconds
+------------------------------
+
+Run 1:    |  1.8655427 seconds
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+ 
+Benchmarked File: lib\adressdaten.csv
+------------------------------
+Results after 1 runs: 
+
+Average: 2.483373 seconds
+------------------------------
+
+Run 1:    |  2.483373 seconds
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+ 

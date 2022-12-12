@@ -113,25 +113,26 @@ public class Main {
         return arrayL;
     }
 
-    private static ArrayList<String[]> bubbleSortNames(ArrayList<String[]> arrayL) {    // time complexity: O(n^2) - worst case
-        int n = arrayL.size();   
+    private static ArrayList<String[]> bubbleSortNames(ArrayList<String[]> arrayList) {    // time complexity: O(n^2) - worst case
+        int n = arrayList.size();   
         int steps = 0; 
-        for (int i = 0; i < n - 1; i++) {   // all elements checked after each other
-            for (int j = 0; j < n - 1; j++) {   // single element moving through array
-                if ((arrayL.get(j)[0].compareTo(arrayL.get(j + 1)[0])) > 0) {
+        for (int i = 0; i < n - 1; i++) {   
+            for (int j = 0; j < n - 1; j++) {   
+                if ((arrayList.get(j)[0].compareTo(arrayList.get(j + 1)[0])) > 0) {
                     // swap current with next element
-                    String temp[] = arrayL.get(j);
-                    arrayL.set(j, arrayL.get(j + 1));
-                    arrayL.set(j + 1, temp);
+                    String temp[] = arrayList.get(j);
+                    arrayList.set(j, arrayList.get(j + 1));
+                    arrayList.set(j + 1, temp);
                 }
                 steps++;
             }
         }
         helper.printSteps(steps);
-        return arrayL;
+        return arrayList;
     }
 
     // Array only version
+    @Deprecated
     private static String[][] bubbleSortNames(String[][] array, Boolean notImproved) { 
         int n = array.length;
         boolean swapped;  

@@ -38,12 +38,10 @@ public class Helper {
     public ArrayList<String[]> readCSVtoList(String file) throws Exception    {
         ArrayList<String[]> persons = new ArrayList<String[]>();
         BufferedReader br = new BufferedReader(new FileReader(file));
-        int i = 0;
         String row = "";
         while ((row = br.readLine()) != null)  {
             String[] rowArray = row.split(",");
             persons.add(rowArray);
-            i++;
         }
         br.close();
         return persons;
