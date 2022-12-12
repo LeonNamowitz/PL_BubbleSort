@@ -17,8 +17,8 @@ public class Main {
         // double seconds = (double)time / 1_000_000_000.0;
         // System.out.println("Time: " + seconds + " seconds");
 
-        benchmark(3, false);
-        // test();
+        // benchmark(3, false);
+        test();
     }
     
 
@@ -36,7 +36,7 @@ public class Main {
             double seconds = (double)time / 1_000_000_000.0;
             System.out.println("Time: " + seconds + " seconds");
             sum += seconds;
-
+            
             String temp = (helper.padRight("Run " + (i + 1) + ":", 10) + "|  " + seconds + " seconds"); // we don't talk about this
             results[i] = temp;
         }
@@ -87,6 +87,7 @@ public class Main {
         return arrayL;
     }
 
+
     // Array only version
     private static String[][] bubbleSortNames(String[][] array, Boolean notImproved) { 
         int n = array.length;
@@ -94,7 +95,7 @@ public class Main {
         int steps = 0; 
         for (int i = 0; i < n - 1; i++) {  
             swapped = notImproved;    
-            for (int j = 0; j < n - 1; j++) {  
+            for (int j = 0; j < n - i - 1; j++) {  // improvement
                 if ((array[j][0].compareTo(array[j + 1][0])) > 0) {
                     String temp[] = array[j];
                     array[j] = array[j + 1];
