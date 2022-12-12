@@ -6,7 +6,6 @@ import java.util.LinkedList;
 public class Main { 
 
     private static LinkedList<Integer> unsortedArray = new LinkedList<Integer>(Arrays.asList(3, 17, 4, 10, 9, 8, 7, 21, 29, 12));
-    static Helper helper = new Helper();
     
     public static void main(String[] args) throws Exception {
  
@@ -30,7 +29,7 @@ public class Main {
         if (!improved)    {
             ArrayList<String[]> sortedList = new ArrayList<String[]>();
             for (int i = 0; i < runs; i++) {
-                ArrayList<String[]> unsortedArray = helper.readCSVtoList(dataFile);
+                ArrayList<String[]> unsortedArray = Helper.readCSVtoList(dataFile);
                 long startTime = System.nanoTime(); 
                 sortedList = bubbleSortNames(unsortedArray);  
                 long endTime = System.nanoTime();
@@ -39,20 +38,20 @@ public class Main {
                 System.out.println("Time: " + seconds + " seconds");
                 sum += seconds;
                 
-                String temp = (helper.padRight("Run " + (i + 1) + ":", 10) + "|  " + seconds + " seconds"); // we don't talk about this
+                String temp = (Helper.padRight("Run " + (i + 1) + ":", 10) + "|  " + seconds + " seconds"); // we don't talk about this
                 results[i] = temp;
             }
             double average = (sum / runs);
             System.out.println("-------------------------");
             System.out.println("Average: " + average);
             System.out.println("Done! " + '\n');
-            helper.writeBenchmarkToFile(results, average, runs, dataFile);
-            helper.writeCSV(sortedList, "lib\\output.csv"); 
+            Helper.writeBenchmarkToFile(results, average, runs, dataFile);
+            Helper.writeCSV(sortedList, "lib\\output.csv"); 
         }
         if (improved)    {
             ArrayList<String[]> sortedList = new ArrayList<String[]>();
             for (int i = 0; i < runs; i++) {
-                ArrayList<String[]> unsortedArray = helper.readCSVtoList(dataFile);
+                ArrayList<String[]> unsortedArray = Helper.readCSVtoList(dataFile);
                 long startTime = System.nanoTime(); 
                 sortedList = bubbleSortNamesImprv(unsortedArray);  
                 long endTime = System.nanoTime();
@@ -61,26 +60,26 @@ public class Main {
                 System.out.println("Time: " + seconds + " seconds");
                 sum += seconds;
                 
-                String temp = (helper.padRight("Run " + (i + 1) + ":", 10) + "|  " + seconds + " seconds"); // we don't talk about this
+                String temp = (Helper.padRight("Run " + (i + 1) + ":", 10) + "|  " + seconds + " seconds"); // we don't talk about this
                 results[i] = temp;
             }
             double average = (sum / runs);
             System.out.println("-------------------------");
             System.out.println("Average: " + average);
             System.out.println("Done! " + '\n');
-            helper.writeBenchmarkToFile(results, average, runs, dataFile);
-            helper.writeCSV(sortedList, "lib\\output.csv"); 
+            Helper.writeBenchmarkToFile(results, average, runs, dataFile);
+            Helper.writeCSV(sortedList, "lib\\output.csv"); 
         }
 
     }
     
     public static void test() throws Exception  {
         // System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        String[][] namesArray = helper.readCSVtoArray("lib\\test.csv"); // adressdaten.csv
+        String[][] namesArray = Helper.readCSVtoArray("lib\\test.csv"); // adressdaten.csv
         System.out.println("-------------------------");
         String[][] sortedArray = bubbleSortNames(namesArray, false);   
         
-        helper.writeCSV(sortedArray, "lib\\output.csv"); 
+        Helper.writeCSV(sortedArray, "lib\\output.csv"); 
         System.out.println("Done! ");
         // helper.print2DArray(namesArray);
     }
@@ -109,7 +108,7 @@ public class Main {
                 break;
             }
         }
-        helper.printSteps(steps);
+        // Helper.printSteps(steps);
         return arrayL;
     }
 
@@ -127,7 +126,7 @@ public class Main {
                 steps++;
             }
         }
-        helper.printSteps(steps);
+        // Helper.printSteps(steps);
         return arrayList;
     }
 
@@ -160,7 +159,7 @@ public class Main {
                 break;
             }
         }
-        helper.printSteps(steps);
+        // Helper.printSteps(steps);
         return array;
     }
 
