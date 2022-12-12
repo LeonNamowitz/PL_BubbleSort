@@ -18,7 +18,7 @@ public class Main {
         // System.out.println("Time: " + seconds + " seconds");
 
         // benchmark(10, false);
-        benchmark(3, true);
+        benchmark(1, false);
         // test();
     }
     
