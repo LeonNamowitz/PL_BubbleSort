@@ -17,35 +17,61 @@ public class Main {
         // double seconds = (double)time / 1_000_000_000.0;
         // System.out.println("Time: " + seconds + " seconds");
 
-        benchmark(3, false);
-        benchmark(3, false);
+        // benchmark(10, false);
+        benchmark(3, true);
         // test();
     }
     
 
-    public static void benchmark(int runs, Boolean notImproved) throws Exception  {
+    public static void benchmark(int runs, Boolean improved) throws Exception  {
         double sum = 0;
         String dataFile = "lib\\adressdaten.csv";   // adressdaten.csv
         String[] results = new String[runs];
-        
-        for (int i = 0; i < runs; i++) {
-            ArrayList<String[]> unsortedArray = helper.readCSVtoList(dataFile);
-            long startTime = System.nanoTime(); 
-            bubbleSortNames(unsortedArray, notImproved);  
-            long endTime = System.nanoTime();
-            long time = endTime - startTime;
-            double seconds = (double)time / 1_000_000_000.0;
-            System.out.println("Time: " + seconds + " seconds");
-            sum += seconds;
-            
-            String temp = (helper.padRight("Run " + (i + 1) + ":", 10) + "|  " + seconds + " seconds"); // we don't talk about this
-            results[i] = temp;
+        if (!improved)    {
+            ArrayList<String[]> sortedList = new ArrayList<String[]>();
+            for (int i = 0; i < runs; i++) {
+                ArrayList<String[]> unsortedArray = helper.readCSVtoList(dataFile);
+                long startTime = System.nanoTime(); 
+                sortedList = bubbleSortNames(unsortedArray);  
+                long endTime = System.nanoTime();
+                long time = endTime - startTime;
+                double seconds = (double)time / 1_000_000_000.0;
+                System.out.println("Time: " + seconds + " seconds");
+                sum += seconds;
+                
+                String temp = (helper.padRight("Run " + (i + 1) + ":", 10) + "|  " + seconds + " seconds"); // we don't talk about this
+                results[i] = temp;
+            }
+            double average = (sum / runs);
+            System.out.println("-------------------------");
+            System.out.println("Average: " + average);
+            System.out.println("Done! " + '\n');
+            helper.writeBenchmarkToFile(results, average, runs, dataFile);
+            helper.writeCSV(sortedList, "lib\\output.csv"); 
         }
-        double average = (sum / runs);
-        System.out.println("-------------------------");
-        System.out.println("Average: " + average);
-        System.out.println("Done! ");
-        helper.writeBenchmarkToFile(results, average, runs, dataFile);
+        if (improved)    {
+            ArrayList<String[]> sortedList = new ArrayList<String[]>();
+            for (int i = 0; i < runs; i++) {
+                ArrayList<String[]> unsortedArray = helper.readCSVtoList(dataFile);
+                long startTime = System.nanoTime(); 
+                sortedList = bubbleSortNamesImprv(unsortedArray);  
+                long endTime = System.nanoTime();
+                long time = endTime - startTime;
+                double seconds = (double)time / 1_000_000_000.0;
+                System.out.println("Time: " + seconds + " seconds");
+                sum += seconds;
+                
+                String temp = (helper.padRight("Run " + (i + 1) + ":", 10) + "|  " + seconds + " seconds"); // we don't talk about this
+                results[i] = temp;
+            }
+            double average = (sum / runs);
+            System.out.println("-------------------------");
+            System.out.println("Average: " + average);
+            System.out.println("Done! " + '\n');
+            helper.writeBenchmarkToFile(results, average, runs, dataFile);
+            helper.writeCSV(sortedList, "lib\\output.csv"); 
+        }
+
     }
     
     public static void test() throws Exception  {
@@ -53,7 +79,7 @@ public class Main {
         String[][] namesArray = helper.readCSVtoArray("lib\\test.csv"); // adressdaten.csv
         System.out.println("-------------------------");
         String[][] sortedArray = bubbleSortNames(namesArray, false);   
-
+        
         helper.writeCSV(sortedArray, "lib\\output.csv"); 
         System.out.println("Done! ");
         // helper.print2DArray(namesArray);
@@ -63,13 +89,13 @@ public class Main {
     //////////////////////////////////// BUBBLE SORT ////////////////////////////////////
 
     // ArrayList version
-    private static ArrayList<String[]> bubbleSortNames(ArrayList<String[]> arrayL, Boolean notImproved) {    // time complexity: O(n^2) - worst case
-        int n = arrayL.size();   
+    private static ArrayList<String[]> bubbleSortNamesImprv(ArrayList<String[]> arrayL) {    // time complexity: O(n^2) - worst case
+        int n = arrayL.size();
         boolean swapped;  
         int steps = 0; 
         for (int i = 0; i < n - 1; i++) {   // all elements checked after each other
-            swapped = notImproved;    // 'false' - improves best case from O(n^2) to O(n)
-            for (int j = 0; j < n - 1; j++) {   // single element moving through array
+            swapped = false;    // 'false' - improves best case from O(n^2) to O(n)
+            for (int j = 0; j < n - i - 1; j++) {   // single element moving through array
                 if ((arrayL.get(j)[0].compareTo(arrayL.get(j + 1)[0])) > 0) {
                     // swap current with next element
                     String temp[] = arrayL.get(j);
@@ -77,9 +103,8 @@ public class Main {
                     arrayL.set(j + 1, temp);
                     swapped = true;
                 }
-
                 steps++;
-            }    
+            }  
             if (swapped == false) { // break out of loop if no swaps were made
                 break;
             }
@@ -88,6 +113,23 @@ public class Main {
         return arrayL;
     }
 
+    private static ArrayList<String[]> bubbleSortNames(ArrayList<String[]> arrayL) {    // time complexity: O(n^2) - worst case
+        int n = arrayL.size();   
+        int steps = 0; 
+        for (int i = 0; i < n - 1; i++) {   // all elements checked after each other
+            for (int j = 0; j < n - 1; j++) {   // single element moving through array
+                if ((arrayL.get(j)[0].compareTo(arrayL.get(j + 1)[0])) > 0) {
+                    // swap current with next element
+                    String temp[] = arrayL.get(j);
+                    arrayL.set(j, arrayL.get(j + 1));
+                    arrayL.set(j + 1, temp);
+                }
+                steps++;
+            }
+        }
+        helper.printSteps(steps);
+        return arrayL;
+    }
 
     // Array only version
     private static String[][] bubbleSortNames(String[][] array, Boolean notImproved) { 
@@ -127,7 +169,7 @@ public class Main {
         int n = array.length;
         for (int i = 0; i < n - 1; i++) {               // all elements checked after each other
             swapped = false;
-            for (int j = 0; j < n - 1; j++) {           // single element + remaining ones moving through array
+            for (int j = 0; j < n - i - 1; j++) {           // single element + remaining ones moving through array
                 if (array[j] > array[j + 1]) {          // 1. find the first element that is smaller than its neighbour
                     int temp = array[j];                // 2. swap it with the next element
                     array[j] = array[j + 1];            // 3. move the same element to the right until the neighbour is bigger 
@@ -151,7 +193,7 @@ public class Main {
         int n = array.size();
         for (int i = 0; i < n - 1; i++) {    // all elements checked after each other
             swapped = false;
-            for (int j = 0; j < n - 1; j++) {    // single element moving through array
+            for (int j = 0; j < n - i - 1; j++) {    // single element moving through array
                 if (array.get(j) > array.get(j + 1)) {
                     // swap current with next element
                     int temp = array.get(j);

@@ -2,12 +2,12 @@ Benchmarked File: lib\adressdaten.csv
 ------------------------------
 Results after 3 runs: 
 
-Average: 4.6362129 seconds
+Average: 1.1166187 seconds
 ------------------------------
 
-Run 1:    |  6.3714317 seconds
-Run 2:    |  3.4404943 seconds
-Run 3:    |  4.0967127 seconds
+Run 1:    |  1.2078859 seconds
+Run 2:    |  1.0932162 seconds
+Run 3:    |  1.048754 seconds
  
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
  
@@ -15,12 +15,25 @@ Benchmarked File: lib\adressdaten.csv
 ------------------------------
 Results after 3 runs: 
 
-Average: 2.3497873333333335 seconds
+Average: 1.1121449333333333 seconds
 ------------------------------
 
-Run 1:    |  1.949783 seconds
-Run 2:    |  2.8600466 seconds
-Run 3:    |  2.2395324 seconds
+Run 1:    |  1.1389653 seconds
+Run 2:    |  1.0711474 seconds
+Run 3:    |  1.1263221 seconds
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+ 
+Benchmarked File: lib\adressdaten.csv
+------------------------------
+Results after 3 runs: 
+
+Average: 1.1142709666666668 seconds
+------------------------------
+
+Run 1:    |  1.1424736 seconds
+Run 2:    |  1.0778734 seconds
+Run 3:    |  1.1224659 seconds
  
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
  
