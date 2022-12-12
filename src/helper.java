@@ -1,12 +1,10 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Helper {
 
-    static DecimalFormat df = new DecimalFormat("#");
 
     private Helper(){}; // Prevents instantiation
     // Boolean printDone = false;
@@ -115,10 +113,10 @@ public class Helper {
         writeStringToFile(" ", benchFile, true);
     }
     
-    public static void writeBench(SortingAlgorithm alg, long steps, double time) throws Exception   {
+    public static void writeBench(SortingAlgorithm alg, Benchmark.InputOrder inputOrder, int sample, long steps, double time) throws Exception   {
         String benchFile = "lib\\bench.csv";
-        df.setMaximumFractionDigits(8);
-        writeStringToFile(alg.getName() + "," + df.format(steps) + "," + time, benchFile, true);
+        String seconds = String.format("%.6f", time);
+        writeStringToFile(alg.getName() + "," + inputOrder + "," + sample + "," + steps + "," + seconds, benchFile, true);
     }
     
     public static void printArray(int[] array) {

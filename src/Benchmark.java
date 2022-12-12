@@ -46,11 +46,11 @@ public class Benchmark {
 
     private void test(SortingAlgorithm algorithm, InputOrder inputOrder, int[] array, boolean warmUp) {
         System.out.printf("%n--- %s (order: %s) ---%n", algorithm.getName(), inputOrder);
-        double time = runAndMeasure(algorithm, array);
+        double time = runAndMeasure(algorithm, array, inputOrder);
     }
 
 
-    private double runAndMeasure(SortingAlgorithm alg, int[] array) {
+    private double runAndMeasure(SortingAlgorithm alg, int[] array, InputOrder inputOrder) {
         double start = System.nanoTime();
         long steps = alg.sort(array);
         double end = System.nanoTime();
@@ -59,7 +59,7 @@ public class Benchmark {
         String stepsF = df.format(new BigDecimal(steps));
         System.out.printf("%s took %s steps and %f seconds%n", alg.getName(), stepsF, seconds);
         try {
-            Helper.writeBench(alg, steps, seconds);
+            Helper.writeBench(alg, inputOrder, array.length, steps, seconds);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,7 +70,7 @@ public class Benchmark {
         
     }
 
-    private enum InputOrder {
+    enum InputOrder {
         RANDOM(false),
         ASCENDING(true),
         DESCENDING(true);
