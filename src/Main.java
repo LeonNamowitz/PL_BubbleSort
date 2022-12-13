@@ -5,24 +5,27 @@ import java.util.LinkedList;
 
 public class Main { 
 
-    private static LinkedList<Integer> unsortedArray = new LinkedList<Integer>(Arrays.asList(3, 17, 4, 10, 9, 8, 7, 21, 29, 12));
+    private static int[] unsortedArray = new int[]{3, 17, 4, 10, 9, 8, 7, 21, 29, 12};
     
     public static void main(String[] args) throws Exception {
- 
-        // long startTime = System.nanoTime();
-        // bubbleSortLists(unsortedArray);
-        // long endTime = System.nanoTime();
-        // long time = endTime - startTime;
-        // double seconds = (double)time / 1_000_000_000.0;
-        // System.out.println("Time: " + seconds + " seconds");
 
+        aufgabe1(false);
         // benchmark(10, false);
-        benchmark(1, false);
+        // benchmark(5, false);
         // test();
     }
     
+    private static void aufgabe1(Boolean print)      {
+        System.out.println("************************************************************************");
+        System.out.println("Unsorted Array: " + '\n' + Arrays.toString(unsortedArray));
+        int[] sortedArray = bubbleSort(unsortedArray, print);
+        System.out.println('\n' + "Sorted Array: " + '\n' + Arrays.toString(sortedArray) + '\n');
+        System.out.println("************************************************************************");
 
-    public static void benchmark(int runs, Boolean improved) throws Exception  {
+    }
+
+
+    private static void benchmark(int runs, Boolean improved) throws Exception  {
         double sum = 0;
         String dataFile = "lib\\adressdaten.csv";   // adressdaten.csv
         String[] results = new String[runs];
@@ -73,7 +76,7 @@ public class Main {
 
     }
     
-    public static void test() throws Exception  {
+    private static void test() throws Exception  {
         // System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         String[][] namesArray = Helper.readCSVtoArray("lib\\test.csv"); // adressdaten.csv
         System.out.println("-------------------------");
@@ -131,7 +134,6 @@ public class Main {
     }
 
     // Array only version
-    @Deprecated
     private static String[][] bubbleSortNames(String[][] array, Boolean notImproved) { 
         int n = array.length;
         boolean swapped;  
@@ -164,18 +166,24 @@ public class Main {
     }
 
 
-    private static int[] bubbleSort(int[] array) {    // time complexity: O(n^2) - worst case
-        boolean swapped;    // prevent alg from going through a sorted array
+    private static int[] bubbleSort(int[] array, Boolean print) {      // time complexity: O(n^2) - worst case
+        boolean swapped;                                // prevent alg from going through a sorted array
         int n = array.length;
         for (int i = 0; i < n - 1; i++) {               // all elements checked after each other
+            if (print)
+                System.out.println('\n' + "------------------" + "Bubble Phase " + (i + 1) + "------------------" + '\n');
             swapped = false;
-            for (int j = 0; j < n - i - 1; j++) {           // single element + remaining ones moving through array
+            for (int j = 0; j < n - i - 1; j++) {       // single element + remaining ones moving through array
                 if (array[j] > array[j + 1]) {          // 1. find the first element that is smaller than its neighbour
                     int temp = array[j];                // 2. swap it with the next element
                     array[j] = array[j + 1];            // 3. move the same element to the right until the neighbour is bigger 
                     array[j + 1] = temp;                // 4. then check if the remaining elements can be moved
                     swapped = true;
+                    if (print)
+                        System.out.println('\n' + "Swapped " + array[j + 1] + " with " + array[j] + '\n');
                 }
+                if (print)
+                    System.out.println("Array: " + Arrays.toString(array) + "        j = " + j);
             }
             if (!swapped)
                 break;
