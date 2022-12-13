@@ -150,15 +150,14 @@ public class Helper {
     }
 
     @Deprecated
-    // public void printSteps(int steps) {
-        
-    //     if (!printDone)  {
-    //         String temp = ("Steps: " + steps);
-    //         System.out.println(temp);
-    //         System.out.println("-------------------------");
-    //         printDone = true;
-    //     }
-    // }
+    public static void printSteps(int steps) {
+        if (true)  {
+            String temp = ("Steps: " + steps);
+            System.out.println(temp);
+            System.out.println("-------------------------");
+            // printDone = true;
+        }
+    }
 
 
     public static int[] createRandomArray(int size) {

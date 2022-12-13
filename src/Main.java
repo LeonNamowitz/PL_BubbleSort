@@ -11,9 +11,9 @@ public class Main {
 
         // aufgabe1(true);
         // aufgabe2();
-        adressBenchmark(100, true);
+        // adressBenchmark(10, true);
         // adressBenchmark(5, false);
-        // test();
+        test();
     }
     
     private static void aufgabe1(Boolean print)      {
@@ -88,30 +88,31 @@ public class Main {
     
     private static void test() throws Exception  {
         // System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        String[][] namesArray = Helper.readCSVtoArray("lib\\test.csv"); // adressdaten.csv
+        ArrayList<String[]> namesArray = Helper.readCSVtoList("lib\\adressdaten.csv"); // adressdaten.csv
         System.out.println("-------------------------");
-        String[][] sortedArray = bubbleSortNames(namesArray, false);   
+        // ArrayList<String[]> sortedArray = selectionSort(namesArray);   
+        ArrayList<String[]> sortedArray = insertionSort(namesArray);   
         
         Helper.writeCSV(sortedArray, "lib\\output.csv"); 
         System.out.println("Done! ");
-        // helper.print2DArray(namesArray);
+        // Helper.print2DArray(namesArray);
     }
 
 
     //////////////////////////////////// BUBBLE SORT ////////////////////////////////////
 
     // improved ArrayList version
-    private static ArrayList<String[]> bubbleSortNamesImprv(ArrayList<String[]> arrayL) {    
-        int n = arrayL.size();
+    private static ArrayList<String[]> bubbleSortNamesImprv(ArrayList<String[]> arrayList) {    
+        int n = arrayList.size();
         boolean swapped;  
         int steps = 0; 
         for (int i = 0; i < n - 1; i++) {   
             swapped = false;    // 'false' - improves best case from O(n^2) to O(n)
             for (int j = 0; j < n - i - 1; j++) {   
-                if ((arrayL.get(j)[0].compareTo(arrayL.get(j + 1)[0])) > 0) {
-                    String temp[] = arrayL.get(j);
-                    arrayL.set(j, arrayL.get(j + 1));
-                    arrayL.set(j + 1, temp);
+                if ((arrayList.get(j)[0].compareTo(arrayList.get(j + 1)[0])) > 0) {
+                    String temp[] = arrayList.get(j);
+                    arrayList.set(j, arrayList.get(j + 1));
+                    arrayList.set(j + 1, temp);
                     swapped = true;
                 }
                 steps++;
@@ -121,7 +122,7 @@ public class Main {
             }
         }
         // Helper.printSteps(steps);
-        return arrayL;
+        return arrayList;
     }
 
     // basic ArrayList version
@@ -175,6 +176,41 @@ public class Main {
         return array;
     }
 
+    public static ArrayList<String[]> insertionSort (ArrayList<String[]> arrayList) {
+        int n = arrayList.size();
+        int steps = 0;
+        for (int i = 1; i < n; i++) {
+            String current[] = arrayList.get(i);
+            int j = i - 1;
+            while (j >= 0 && (arrayList.get(j)[0].compareTo(current[0]) > 0)) {
+                arrayList.set(j + 1, arrayList.get(j));
+                j--;
+                steps++;
+            }
+            arrayList.set(j + 1, current);
+        }
+        Helper.printSteps(steps);
+        return arrayList;
+    }
+
+    public static ArrayList<String[]> selectionSort(ArrayList<String[]> arrayList) {
+        int n = arrayList.size();
+        int steps = 0;
+        for (int i = 0; i < n - 1; i++) {               // moves the boundary of the unsorted subarray
+            int minIndex = i;
+            for (int j = i + 1; j < n; j++) {           // find the smallest element in the unsorted subarray
+                if ((arrayList.get(j)[0].compareTo(arrayList.get(minIndex)[0])) < 0) {
+                minIndex = j;
+                }
+                steps++;
+            }                                           // swap the smallest element with the first element
+            String temp[] = arrayList.get(minIndex);    // save current/min  value
+            arrayList.set(minIndex, arrayList.get(i));  // set current to first
+            arrayList.set(i, temp);                     // set first to current/min
+        }
+        Helper.printSteps(steps);
+        return arrayList;
+    }
 
     private static int[] bubbleSort(int[] array, Boolean print) {      // time complexity: O(n^2) - worst case
         boolean swapped;                                // prevent alg from going through a sorted array
