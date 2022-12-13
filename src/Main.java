@@ -11,8 +11,8 @@ public class Main {
 
         // aufgabe1(true);
         // aufgabe2();
-        // benchmark(10, false);
-        // benchmark(5, false);
+        adressBenchmark(100, true);
+        // adressBenchmark(5, false);
         // test();
     }
     
@@ -35,7 +35,7 @@ public class Main {
     }
 
 
-    private static void benchmark(int runs, Boolean improved) throws Exception  {
+    private static void adressBenchmark(int runs, Boolean improved) throws Exception  {
         double sum = 0;
         String dataFile = "lib\\adressdaten.csv";   // adressdaten.csv
         String[] results = new String[runs];
@@ -100,16 +100,15 @@ public class Main {
 
     //////////////////////////////////// BUBBLE SORT ////////////////////////////////////
 
-    // ArrayList version
-    private static ArrayList<String[]> bubbleSortNamesImprv(ArrayList<String[]> arrayL) {    // time complexity: O(n^2) - worst case
+    // improved ArrayList version
+    private static ArrayList<String[]> bubbleSortNamesImprv(ArrayList<String[]> arrayL) {    
         int n = arrayL.size();
         boolean swapped;  
         int steps = 0; 
-        for (int i = 0; i < n - 1; i++) {   // all elements checked after each other
+        for (int i = 0; i < n - 1; i++) {   
             swapped = false;    // 'false' - improves best case from O(n^2) to O(n)
-            for (int j = 0; j < n - i - 1; j++) {   // single element moving through array
+            for (int j = 0; j < n - i - 1; j++) {   
                 if ((arrayL.get(j)[0].compareTo(arrayL.get(j + 1)[0])) > 0) {
-                    // swap current with next element
                     String temp[] = arrayL.get(j);
                     arrayL.set(j, arrayL.get(j + 1));
                     arrayL.set(j + 1, temp);
@@ -125,7 +124,8 @@ public class Main {
         return arrayL;
     }
 
-    private static ArrayList<String[]> bubbleSortNames(ArrayList<String[]> arrayList) {    // time complexity: O(n^2) - worst case
+    // basic ArrayList version
+    private static ArrayList<String[]> bubbleSortNames(ArrayList<String[]> arrayList) {   
         int n = arrayList.size();   
         int steps = 0; 
         for (int i = 0; i < n - 1; i++) {   
@@ -143,7 +143,7 @@ public class Main {
         return arrayList;
     }
 
-    // Array only version
+    // improved Array version
     private static String[][] bubbleSortNames(String[][] array, Boolean notImproved) { 
         int n = array.length;
         boolean swapped;  
@@ -206,22 +206,4 @@ public class Main {
     // Experiments by Astrachan sorting strings in Java show bubble sort to be roughly 5 times slower than insertion sort and 40% slower than selection sort"
     // Source: https://en.wikipedia.org/wiki/Bubble_sort
     // https://youtu.be/m4yVlPqeZwo?t=1400
-    private static LinkedList<Integer> bubbleSortLists(LinkedList<Integer> array) {    // time complexity: O(n^2) - worst case
-        boolean swapped;
-        int n = array.size();
-        for (int i = 0; i < n - 1; i++) {    // all elements checked after each other
-            swapped = false;
-            for (int j = 0; j < n - i - 1; j++) {    // single element moving through array
-                if (array.get(j) > array.get(j + 1)) {
-                    // swap current with next element
-                    int temp = array.get(j);
-                    array.set(j, array.get(j + 1));
-                    array.set(j + 1, temp);
-                }
-            }
-            if (!swapped)
-                break;
-        }
-        return array;
-    }
 }
