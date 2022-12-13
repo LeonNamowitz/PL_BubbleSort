@@ -113,14 +113,19 @@ public class Helper {
         writeStringToFile(" ", benchFile, true);
     }
     
-    public static void writeBench(SortingAlgorithm alg, Benchmark.InputOrder inputOrder, int sample, long steps, double time) throws Exception   {
+    public static void writeBench(DataHandler dh) throws Exception   {
+        SortingAlgorithm alg = dh.getAlgorithm();
+        Benchmark.InputOrder inputOrder = dh.getInputOrder();
+        int sample = dh.getSampleSize();
+        long steps = dh.getSteps();
+        double averageTime = dh.getAverage();
         String benchFile = "lib\\bench.csv";
         BufferedReader br = new BufferedReader(new FileReader(benchFile));     
         if (br.readLine() == null) {
             writeStringToFile("Name" + "," + "Data order" + "," + "Sample size" + "," + "Steps" + "," + "Time in s", benchFile, false);
         }
         br.close();
-        String seconds = String.format("%.6f", time);
+        String seconds = String.format("%.6f", averageTime);
         writeStringToFile(alg.getName() + "," + inputOrder + "," + sample + "," + steps + "," + seconds, benchFile, true);
     }
     

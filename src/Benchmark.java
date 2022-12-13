@@ -7,8 +7,8 @@ public class Benchmark {
 
     private static final Boolean DEBUG = false;
     private static final int WARM_UPS = 0;
-    private static final int REPEATS = 1;
-    private static final int LIMIT = 20_000;
+    private static final int REPEATS = 10;
+    private static final int LIMIT = 100_000;
 
     static final SortingAlgorithm[] ALGORITHMS = {
             new BubbleSort(),
@@ -24,28 +24,34 @@ public class Benchmark {
 
     private void run() {
         for (int i = 0; i < WARM_UPS; i++) {
+            DataHandler dh = new DataHandler("WarmUp");
             if (DEBUG) {
                 System.out.printf("%n===== Warm up %d of %d =====%n", i, WARM_UPS);
             }
             for (SortingAlgorithm algorithm : ALGORITHMS) {
-                test(algorithm, true, LIMIT/2);
+                test(algorithm, true, LIMIT/2, dh, dh, dh);
             }
         }
         
         for (SortingAlgorithm algorithm : ALGORITHMS) {
-            DataHandler dh1 = new DataHandler(algorithm.getName());
-            DataHandler dh2 = new DataHandler(algorithm.getName());
-            DataHandler dh3 = new DataHandler(algorithm.getName());
             for (int sample = 1000; sample < LIMIT; sample *= 2) {
+                DataHandler dh1 = new DataHandler(algorithm.getName());
+                DataHandler dh2 = new DataHandler(algorithm.getName());
+                DataHandler dh3 = new DataHandler(algorithm.getName());
                 for (int i = 0; i < REPEATS ; i++) {
                     if (DEBUG) {
                         System.out.printf("%n===== Iteration %d =====%n", i);
                     }
                   test(algorithm, false, sample, dh1, dh2, dh3);
                 }
-                
+                try {
+                    Helper.writeBench(dh1);
+                    Helper.writeBench(dh2);
+                    Helper.writeBench(dh3);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }   
             }
-            Helper.writeBench(algorithm, , , REPEATS, LIMIT);
         }
     }
 
@@ -70,8 +76,7 @@ public class Benchmark {
         double end = System.nanoTime();
         double duration = end - start;
         double seconds = duration / 1000000000;
-        dh.addTime(seconds);
-        dh.setOrder(inputOrder.toString());
+        dh.addData(alg, inputOrder, array.length, steps, seconds);
         if (DEBUG) {
             String stepsF = df.format(new BigDecimal(steps));
             System.out.printf("%s took %s steps and %f seconds%n", alg.getName(), stepsF, seconds);
@@ -79,11 +84,11 @@ public class Benchmark {
         if (warmUp) {
             return duration;
         }
-        try {
-            Helper.writeBench(alg, inputOrder, array.length, steps, seconds);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // try {
+        //     Helper.writeBench(alg, inputOrder, array.length, steps, seconds);
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
         return duration;
     }
 
