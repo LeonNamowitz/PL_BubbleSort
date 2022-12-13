@@ -6,9 +6,9 @@ public class Benchmark {
     private static DecimalFormat df = new DecimalFormat("");
 
     private static final Boolean DEBUG = false;
-    private static final int WARM_UPS = 0;
-    private static final int REPEATS = 10;
-    private static final int LIMIT = 100_000;
+    private static final int WARM_UPS = 1;
+    private static final int REPEATS = 4;
+    private static final int LIMIT = 200_000;
 
     static final SortingAlgorithm[] ALGORITHMS = {
             new BubbleSort(),
@@ -34,6 +34,7 @@ public class Benchmark {
         }
         
         for (SortingAlgorithm algorithm : ALGORITHMS) {
+            Boolean hasRun = false;
             for (int sample = 1000; sample < LIMIT; sample *= 2) {
                 DataHandler dh1 = new DataHandler(algorithm.getName());
                 DataHandler dh2 = new DataHandler(algorithm.getName());
@@ -43,14 +44,17 @@ public class Benchmark {
                         System.out.printf("%n===== Iteration %d =====%n", i);
                     }
                   test(algorithm, false, sample, dh1, dh2, dh3);
+                  hasRun = true;
                 }
-                try {
-                    Helper.writeBench(dh1);
-                    Helper.writeBench(dh2);
-                    Helper.writeBench(dh3);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }   
+                if (hasRun) {
+                    try {
+                        Helper.writeBench(dh1);
+                        Helper.writeBench(dh2);
+                        Helper.writeBench(dh3);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
     }
