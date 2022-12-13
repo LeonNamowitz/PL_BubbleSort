@@ -9,7 +9,8 @@ public class Main {
     
     public static void main(String[] args) throws Exception {
 
-        aufgabe1(false);
+        // aufgabe1(true);
+        aufgabe2();
         // benchmark(10, false);
         // benchmark(5, false);
         // test();
@@ -21,7 +22,15 @@ public class Main {
         int[] sortedArray = bubbleSort(unsortedArray, print);
         System.out.println('\n' + "Sorted Array: " + '\n' + Arrays.toString(sortedArray) + '\n');
         System.out.println("************************************************************************");
+    }
 
+    private static void aufgabe2()  throws Exception {
+        String[][] namesArray = Helper.readCSVtoArray("lib\\adressdaten.csv"); // adressdaten.csv
+        System.out.println("-------------------------");
+        String[][] sortedArray = bubbleSortNames(namesArray, false);   
+        Helper.writeCSV(sortedArray, "lib\\output.csv"); 
+        System.out.println("Done! ");
+        // Helper.print2DArray(namesArray);
     }
 
 
@@ -173,7 +182,7 @@ public class Main {
             if (print)
                 System.out.println('\n' + "------------------" + "Bubble Phase " + (i + 1) + "------------------" + '\n');
             swapped = false;
-            for (int j = 0; j < n - i - 1; j++) {       // single element + remaining ones moving through array
+            for (int j = 0; j < n - 1; j++) {           // single element + remaining ones moving through array
                 if (print)
                     System.out.println("Array: " + Arrays.toString(array) + "        j = " + j);
                 if (array[j] > array[j + 1]) {          // 1. find the first element that is smaller than its neighbour
