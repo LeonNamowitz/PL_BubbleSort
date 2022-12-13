@@ -25,6 +25,7 @@ public class Main {
     }
 
     private static void aufgabe2()  throws Exception {
+        // ArrayList<String[]> namesArray = Helper.readCSVtoList("lib\\adressdaten.csv"); // adressdaten.csv
         String[][] namesArray = Helper.readCSVtoArray("lib\\adressdaten.csv"); // adressdaten.csv
         System.out.println("-------------------------");
         String[][] sortedArray = bubbleSortNames(namesArray, false);   
