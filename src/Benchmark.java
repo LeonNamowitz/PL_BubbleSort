@@ -7,7 +7,7 @@ public class Benchmark {
 
     private static final Boolean DEBUG = false;
     private static final int WARM_UPS = 0;
-    private static final int ITERATIONS = 10;
+    private static final int REPEATS = 1;
     private static final int LIMIT = 20_000;
 
     static final SortingAlgorithm[] ALGORITHMS = {
@@ -28,24 +28,27 @@ public class Benchmark {
                 System.out.printf("%n===== Warm up %d of %d =====%n", i, WARM_UPS);
             }
             for (SortingAlgorithm algorithm : ALGORITHMS) {
-                test(algorithm, true);
+                test(algorithm, true, LIMIT/2);
             }
         }
 
-        for (int i = 0; i < ITERATIONS ; i++) {
-            if (DEBUG) {
-                System.out.printf("%n===== Iteration %d =====%n", i);
-            }
-            for (SortingAlgorithm algorithm : ALGORITHMS) {
-              test(algorithm, false);
+        for (int i = 0; i < REPEATS ; i++) {
+            for (int sample = 1000; sample < LIMIT; sample *= 2) {
+                if (DEBUG) {
+                    System.out.printf("%n===== Iteration %d =====%n", i);
+                }
+                for (SortingAlgorithm algorithm : ALGORITHMS) {
+                  test(algorithm, false, sample);
+                }
+                
             }
         }
     }
 
-    private void test (SortingAlgorithm algorithm, boolean warmUp) {
-        test(algorithm, InputOrder.RANDOM, Helper.createRandomArray(LIMIT), warmUp);
-        test(algorithm, InputOrder.ASCENDING, Helper.createAscendingArray(LIMIT), warmUp);
-        test(algorithm, InputOrder.DESCENDING, Helper.createDescendingArray(LIMIT), warmUp);
+    private void test (SortingAlgorithm algorithm, boolean warmUp, int sample) {
+        test(algorithm, InputOrder.RANDOM, Helper.createRandomArray(sample), warmUp);
+        test(algorithm, InputOrder.ASCENDING, Helper.createAscendingArray(sample), warmUp);
+        test(algorithm, InputOrder.DESCENDING, Helper.createDescendingArray(sample), warmUp);
     }
 
     private void test(SortingAlgorithm algorithm, InputOrder inputOrder, int[] array, boolean warmUp) {
