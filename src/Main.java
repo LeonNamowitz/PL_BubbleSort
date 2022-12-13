@@ -174,6 +174,8 @@ public class Main {
                 System.out.println('\n' + "------------------" + "Bubble Phase " + (i + 1) + "------------------" + '\n');
             swapped = false;
             for (int j = 0; j < n - i - 1; j++) {       // single element + remaining ones moving through array
+                if (print)
+                    System.out.println("Array: " + Arrays.toString(array) + "        j = " + j);
                 if (array[j] > array[j + 1]) {          // 1. find the first element that is smaller than its neighbour
                     int temp = array[j];                // 2. swap it with the next element
                     array[j] = array[j + 1];            // 3. move the same element to the right until the neighbour is bigger 
@@ -182,8 +184,6 @@ public class Main {
                     if (print)
                         System.out.println('\n' + "Swapped " + array[j + 1] + " with " + array[j] + '\n');
                 }
-                if (print)
-                    System.out.println("Array: " + Arrays.toString(array) + "        j = " + j);
             }
             if (!swapped)
                 break;
