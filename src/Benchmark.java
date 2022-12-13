@@ -29,7 +29,8 @@ public class Benchmark {
                 System.out.printf("%n===== Warm up %d of %d =====%n", i, WARM_UPS);
             }
             for (SortingAlgorithm algorithm : ALGORITHMS) {
-                test(algorithm, true, LIMIT/2, dh, dh, dh);
+                test(algorithm, true, 50_000, dh, dh, dh);
+                System.out.println("Warm up done");
             }
         }
         
