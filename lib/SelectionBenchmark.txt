@@ -1,0 +1,110 @@
+Benchmarked File: lib\adressdaten.csv
+------------------------------
+Results after 100 runs: 
+
+Average: 0.3296635009999999 seconds
+------------------------------
+
+Run 1:    |  0.3408683 seconds
+Run 2:    |  0.322878 seconds
+Run 3:    |  0.322003 seconds
+Run 4:    |  0.337304 seconds
+Run 5:    |  0.3538683 seconds
+Run 6:    |  0.283148 seconds
+Run 7:    |  0.3303472 seconds
+Run 8:    |  0.3234623 seconds
+Run 9:    |  0.3384862 seconds
+Run 10:   |  0.3384011 seconds
+Run 11:   |  0.3286117 seconds
+Run 12:   |  0.3029891 seconds
+Run 13:   |  0.3380486 seconds
+Run 14:   |  0.312174 seconds
+Run 15:   |  0.3332153 seconds
+Run 16:   |  0.345149 seconds
+Run 17:   |  0.2638757 seconds
+Run 18:   |  0.3166524 seconds
+Run 19:   |  0.3318365 seconds
+Run 20:   |  0.3275623 seconds
+Run 21:   |  0.326829 seconds
+Run 22:   |  0.3644871 seconds
+Run 23:   |  0.3016265 seconds
+Run 24:   |  0.3284578 seconds
+Run 25:   |  0.3296999 seconds
+Run 26:   |  0.3614929 seconds
+Run 27:   |  0.3207661 seconds
+Run 28:   |  0.2869315 seconds
+Run 29:   |  0.3201286 seconds
+Run 30:   |  0.3332721 seconds
+Run 31:   |  0.3236856 seconds
+Run 32:   |  0.3347797 seconds
+Run 33:   |  0.2537566 seconds
+Run 34:   |  0.3683747 seconds
+Run 35:   |  0.3269065 seconds
+Run 36:   |  0.3638385 seconds
+Run 37:   |  0.336713 seconds
+Run 38:   |  0.3139506 seconds
+Run 39:   |  0.3118573 seconds
+Run 40:   |  0.3278179 seconds
+Run 41:   |  0.3463403 seconds
+Run 42:   |  0.3248671 seconds
+Run 43:   |  0.3269727 seconds
+Run 44:   |  0.316627 seconds
+Run 45:   |  0.3226242 seconds
+Run 46:   |  0.3483489 seconds
+Run 47:   |  0.3473481 seconds
+Run 48:   |  0.344847 seconds
+Run 49:   |  0.3059748 seconds
+Run 50:   |  0.3151479 seconds
+Run 51:   |  0.3449869 seconds
+Run 52:   |  0.3279398 seconds
+Run 53:   |  0.3171841 seconds
+Run 54:   |  0.3068544 seconds
+Run 55:   |  0.3191319 seconds
+Run 56:   |  0.3388584 seconds
+Run 57:   |  0.359219 seconds
+Run 58:   |  0.3262345 seconds
+Run 59:   |  0.3152161 seconds
+Run 60:   |  0.3461495 seconds
+Run 61:   |  0.3176321 seconds
+Run 62:   |  0.3182172 seconds
+Run 63:   |  0.3098447 seconds
+Run 64:   |  0.3363109 seconds
+Run 65:   |  0.3503417 seconds
+Run 66:   |  0.3146321 seconds
+Run 67:   |  0.3746539 seconds
+Run 68:   |  0.2686429 seconds
+Run 69:   |  0.3382328 seconds
+Run 70:   |  0.3431092 seconds
+Run 71:   |  0.3590535 seconds
+Run 72:   |  0.3216327 seconds
+Run 73:   |  0.3096413 seconds
+Run 74:   |  0.3371677 seconds
+Run 75:   |  0.3242251 seconds
+Run 76:   |  0.3564594 seconds
+Run 77:   |  0.3712796 seconds
+Run 78:   |  0.3198644 seconds
+Run 79:   |  0.3410467 seconds
+Run 80:   |  0.3353874 seconds
+Run 81:   |  0.33413 seconds
+Run 82:   |  0.3320905 seconds
+Run 83:   |  0.3195474 seconds
+Run 84:   |  0.3456386 seconds
+Run 85:   |  0.3778894 seconds
+Run 86:   |  0.3343059 seconds
+Run 87:   |  0.299873 seconds
+Run 88:   |  0.3324505 seconds
+Run 89:   |  0.361319 seconds
+Run 90:   |  0.3369109 seconds
+Run 91:   |  0.3472759 seconds
+Run 92:   |  0.3396918 seconds
+Run 93:   |  0.3257858 seconds
+Run 94:   |  0.3345108 seconds
+Run 95:   |  0.3118344 seconds
+Run 96:   |  0.3380605 seconds
+Run 97:   |  0.3308423 seconds
+Run 98:   |  0.3259665 seconds
+Run 99:   |  0.3228919 seconds
+Run 100:  |  0.3408342 seconds
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+ 

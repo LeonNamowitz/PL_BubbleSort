@@ -10,7 +10,7 @@ public class Main {
 
         // aufgabe1(true);
         // aufgabe2();
-        adressBenchmark(5, true, true, true);
+        adressBenchmark(100, true, true, true, true);
         // test();
     }
     
@@ -33,12 +33,12 @@ public class Main {
     }
 
 
-    private static void adressBenchmark(int runs, Boolean improved, Boolean insertion, Boolean selection) throws Exception  {
-        double sum = 0;
+    private static void adressBenchmark(int runs, Boolean bubbleImpr, Boolean bubble, Boolean insertion, Boolean selection) throws Exception  {
         String dataFile = "lib\\adressdaten.csv";   // adressdaten.csv
         String[] results = new String[runs];
-        if (!improved)    {
+        if (bubble)    {
             ArrayList<String[]> sortedList = new ArrayList<String[]>();
+            double sum = 0;
             for (int i = 0; i < runs; i++) {
                 ArrayList<String[]> unsortedArray = Helper.readCSVtoList(dataFile);
                 long startTime = System.nanoTime(); 
@@ -55,12 +55,14 @@ public class Main {
             double average = (sum / runs);
             System.out.println("-------------------------");
             System.out.println("Average: " + average);
-            System.out.println("Done! " + '\n');
+            System.out.println("-------------------------");
+            System.out.println("Bubble Sort Done! " + '\n');
             Helper.writeBenchmarkToFile(results, average, runs, dataFile, "lib\\BubbleBenchmark.txt");
             Helper.writeCSV(sortedList, "lib\\output.csv"); 
         }
-        if (improved)    {
+        if (bubbleImpr)    {
             ArrayList<String[]> sortedList = new ArrayList<String[]>();
+            double sum = 0;
             for (int i = 0; i < runs; i++) {
                 ArrayList<String[]> unsortedArray = Helper.readCSVtoList(dataFile);
                 long startTime = System.nanoTime(); 
@@ -77,12 +79,14 @@ public class Main {
             double average = (sum / runs);
             System.out.println("-------------------------");
             System.out.println("Average: " + average);
-            System.out.println("Done! " + '\n');
+            System.out.println("-------------------------");
+            System.out.println("Improved Bubble Sort Done! " + '\n');
             Helper.writeBenchmarkToFile(results, average, runs, dataFile, "lib\\BubbleImprovedBenchmark.txt");
             Helper.writeCSV(sortedList, "lib\\output.csv"); 
         }
         if (insertion)  {
             ArrayList<String[]> sortedList = new ArrayList<String[]>();
+            double sum = 0;
             for (int i = 0; i < runs; i++) {
                 ArrayList<String[]> unsortedArray = Helper.readCSVtoList(dataFile);
                 long startTime = System.nanoTime(); 
@@ -99,12 +103,14 @@ public class Main {
             double average = (sum / runs);
             System.out.println("-------------------------");
             System.out.println("Average: " + average);
-            System.out.println("Done! " + '\n');
+            System.out.println("-------------------------");
+            System.out.println("Insertion Sort Done! " + '\n');
             Helper.writeBenchmarkToFile(results, average, runs, dataFile, "lib\\InsertionBenchmark.txt");
             Helper.writeCSV(sortedList, "lib\\output.csv"); 
         }
         if (selection)  {
             ArrayList<String[]> sortedList = new ArrayList<String[]>();
+            double sum = 0;
             for (int i = 0; i < runs; i++) {
                 ArrayList<String[]> unsortedArray = Helper.readCSVtoList(dataFile);
                 long startTime = System.nanoTime(); 
@@ -121,11 +127,12 @@ public class Main {
             double average = (sum / runs);
             System.out.println("-------------------------");
             System.out.println("Average: " + average);
-            System.out.println("Done! " + '\n');
+            System.out.println("-------------------------");
+            System.out.println("Selection Done! " + '\n');
             Helper.writeBenchmarkToFile(results, average, runs, dataFile, "lib\\SelectionBenchmark.txt");
             Helper.writeCSV(sortedList, "lib\\output.csv"); 
         }
-
+        
     }
     
     private static void test() throws Exception  {
@@ -133,8 +140,12 @@ public class Main {
         ArrayList<String[]> namesArray = Helper.readCSVtoList("lib\\adressdaten.csv"); // adressdaten.csv
         System.out.println("-------------------------");
         // ArrayList<String[]> sortedArray = selectionSort(namesArray);   
+        long startTime = System.nanoTime(); 
         ArrayList<String[]> sortedArray = insertionSort(namesArray);   
-        
+        long endTime = System.nanoTime();
+        long time = endTime - startTime;
+        double seconds = (double)time / 1_000_000_000.0;
+        System.out.println("Time: " + seconds + " seconds");
         Helper.writeCSV(sortedArray, "lib\\output.csv"); 
         System.out.println("Done! ");
         // Helper.print2DArray(namesArray);
@@ -231,7 +242,7 @@ public class Main {
             }
             arrayList.set(j + 1, current);
         }
-        Helper.printSteps(steps);
+        // Helper.printSteps(steps);
         return arrayList;
     }
 
@@ -250,7 +261,7 @@ public class Main {
             arrayList.set(minIndex, arrayList.get(i));  // set current to first
             arrayList.set(i, temp);                     // set first to current/min
         }
-        Helper.printSteps(steps);
+        // Helper.printSteps(steps);
         return arrayList;
     }
 
