@@ -16,7 +16,7 @@ public class BubbleSortImproved implements SortingAlgorithm {
                 steps++;
             }
             if (!swapped)
-            break;
+                break;
         }
         // String temp = df.format(new BigDecimal(steps));
         // System.out.println("Steps: " + temp);

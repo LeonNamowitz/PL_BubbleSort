@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         // aufgabe1(true);
-        aufgabe2();
+        // aufgabe2();
         // benchmark(10, false);
         // benchmark(5, false);
         // test();
