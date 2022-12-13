@@ -83,20 +83,10 @@ public class Benchmark {
             String stepsF = df.format(new BigDecimal(steps));
             System.out.printf("%s took %s steps and %f seconds%n", alg.getName(), stepsF, seconds);
         }
-        if (warmUp) {
-            return duration;
-        }
-        // try {
-        //     Helper.writeBench(alg, inputOrder, array.length, steps, seconds);
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // }
         return duration;
     }
 
-    private void writeBench() {
-        
-    }
+
 
     enum InputOrder {
         RANDOM(false),
