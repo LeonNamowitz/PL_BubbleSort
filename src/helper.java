@@ -99,8 +99,8 @@ public class Helper {
     }
 
     @Deprecated
-    public static void writeBenchmarkToFile(String[] results, double average, int runs, String dataFile) throws Exception    {
-        String benchFile = "lib\\benchmark.txt";
+    public static void writeBenchmarkToFile(String[] results, double average, int runs, String dataFile, String saveFile) throws Exception    {
+        String benchFile = saveFile;
         // addStringToFile(" ", file);
         writeStringToFile("Benchmarked File: " + dataFile, benchFile, true);
         writeStringToFile("------------------------------", benchFile, true);

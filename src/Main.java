@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 
 
 public class Main { 
@@ -11,9 +10,8 @@ public class Main {
 
         // aufgabe1(true);
         // aufgabe2();
-        // adressBenchmark(10, true);
-        // adressBenchmark(5, false);
-        test();
+        adressBenchmark(5, true, true, true);
+        // test();
     }
     
     private static void aufgabe1(Boolean print)      {
@@ -35,7 +33,7 @@ public class Main {
     }
 
 
-    private static void adressBenchmark(int runs, Boolean improved) throws Exception  {
+    private static void adressBenchmark(int runs, Boolean improved, Boolean insertion, Boolean selection) throws Exception  {
         double sum = 0;
         String dataFile = "lib\\adressdaten.csv";   // adressdaten.csv
         String[] results = new String[runs];
@@ -58,7 +56,7 @@ public class Main {
             System.out.println("-------------------------");
             System.out.println("Average: " + average);
             System.out.println("Done! " + '\n');
-            Helper.writeBenchmarkToFile(results, average, runs, dataFile);
+            Helper.writeBenchmarkToFile(results, average, runs, dataFile, "lib\\BubbleBenchmark.txt");
             Helper.writeCSV(sortedList, "lib\\output.csv"); 
         }
         if (improved)    {
@@ -80,7 +78,51 @@ public class Main {
             System.out.println("-------------------------");
             System.out.println("Average: " + average);
             System.out.println("Done! " + '\n');
-            Helper.writeBenchmarkToFile(results, average, runs, dataFile);
+            Helper.writeBenchmarkToFile(results, average, runs, dataFile, "lib\\BubbleImprovedBenchmark.txt");
+            Helper.writeCSV(sortedList, "lib\\output.csv"); 
+        }
+        if (insertion)  {
+            ArrayList<String[]> sortedList = new ArrayList<String[]>();
+            for (int i = 0; i < runs; i++) {
+                ArrayList<String[]> unsortedArray = Helper.readCSVtoList(dataFile);
+                long startTime = System.nanoTime(); 
+                sortedList = insertionSort(unsortedArray);  
+                long endTime = System.nanoTime();
+                long time = endTime - startTime;
+                double seconds = (double)time / 1_000_000_000.0;
+                System.out.println("Time: " + seconds + " seconds");
+                sum += seconds;
+                
+                String temp = (Helper.padRight("Run " + (i + 1) + ":", 10) + "|  " + seconds + " seconds"); // we don't talk about this
+                results[i] = temp;
+            }
+            double average = (sum / runs);
+            System.out.println("-------------------------");
+            System.out.println("Average: " + average);
+            System.out.println("Done! " + '\n');
+            Helper.writeBenchmarkToFile(results, average, runs, dataFile, "lib\\InsertionBenchmark.txt");
+            Helper.writeCSV(sortedList, "lib\\output.csv"); 
+        }
+        if (selection)  {
+            ArrayList<String[]> sortedList = new ArrayList<String[]>();
+            for (int i = 0; i < runs; i++) {
+                ArrayList<String[]> unsortedArray = Helper.readCSVtoList(dataFile);
+                long startTime = System.nanoTime(); 
+                sortedList = selectionSort(unsortedArray);  
+                long endTime = System.nanoTime();
+                long time = endTime - startTime;
+                double seconds = (double)time / 1_000_000_000.0;
+                System.out.println("Time: " + seconds + " seconds");
+                sum += seconds;
+                
+                String temp = (Helper.padRight("Run " + (i + 1) + ":", 10) + "|  " + seconds + " seconds"); // we don't talk about this
+                results[i] = temp;
+            }
+            double average = (sum / runs);
+            System.out.println("-------------------------");
+            System.out.println("Average: " + average);
+            System.out.println("Done! " + '\n');
+            Helper.writeBenchmarkToFile(results, average, runs, dataFile, "lib\\SelectionBenchmark.txt");
             Helper.writeCSV(sortedList, "lib\\output.csv"); 
         }
 
