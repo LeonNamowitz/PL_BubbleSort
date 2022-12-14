@@ -8,8 +8,8 @@ public class Main {
     
     public static void main(String[] args) throws Exception {
 
-        // aufgabe1(false);
-        aufgabe2();
+        aufgabe1(false);
+        // aufgabe2();
 
         // adressBenchmark(10, true, true, true, true);
         // test();
