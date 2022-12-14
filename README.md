@@ -11,17 +11,6 @@
 
 
 *
-* 
-* Barack Obama Clip at the end
-  * https://youtu.be/m4yVlPqeZwo?t=1400
-
-
-
-
-
-
-
-
 
 
 
