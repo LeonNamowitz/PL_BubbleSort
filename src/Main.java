@@ -10,7 +10,7 @@ public class Main {
 
         aufgabe1(false); // change to true to print the steps
         // aufgabe2();
-
+        
         // adressBenchmark(10, true, true, true, true);
         // test();
     }
