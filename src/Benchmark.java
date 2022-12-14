@@ -8,14 +8,13 @@ public class Benchmark {
     private static final Boolean DEBUG = false;
     private static final int WARM_UPS = 1;
     private static final int REPEATS = 1;
-    private static final int LIMIT = 600_000;
+    private static final int LIMIT = 120_000;
 
     static final SortingAlgorithm[] ALGORITHMS = {
             new BubbleSort(),
             new BubbleSortImproved(),
             new SelectionSort(),
             new InsertionSort(),
-            // new JavaArraysSort(),
     };
 
     public static void main(String[] args) {
@@ -35,7 +34,7 @@ public class Benchmark {
         }
         
         for (SortingAlgorithm algorithm : ALGORITHMS) {
-            for (int sample = 50_000; sample < LIMIT; sample += 50_000) {
+            for (int sample = 50_000; sample < LIMIT; sample += 50_000) {   // sample size increase definition
                 DataHandler dh1 = new DataHandler(algorithm.getName());
                 DataHandler dh2 = new DataHandler(algorithm.getName());
                 DataHandler dh3 = new DataHandler(algorithm.getName());

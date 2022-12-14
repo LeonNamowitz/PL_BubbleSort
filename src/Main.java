@@ -8,9 +8,10 @@ public class Main {
     
     public static void main(String[] args) throws Exception {
 
-        // aufgabe1(true);
-        // aufgabe2();
-        adressBenchmark(100, true, true, true, true);
+        // aufgabe1(false);
+        aufgabe2();
+
+        // adressBenchmark(10, true, true, true, true);
         // test();
     }
     
@@ -289,10 +290,4 @@ public class Main {
         }
         return array;
     }
-
-    // "Bubble sort also interacts poorly with modern CPU hardware. 
-    // It requires at least twice as many writes as insertion sort, twice as many cache misses, and asymptotically more branch mispredictions. 
-    // Experiments by Astrachan sorting strings in Java show bubble sort to be roughly 5 times slower than insertion sort and 40% slower than selection sort"
-    // Source: https://en.wikipedia.org/wiki/Bubble_sort
-    // https://youtu.be/m4yVlPqeZwo?t=1400
 }
